@@ -8,9 +8,8 @@ class MainHandler(tornado.web.RequestHandler):
     def post(self):
         content_type = self.request.headers.get("Content-Type", "")
         if content_type.startswith("application/json"):
-            dict = json_decode(self.request.body)
-            sorted_dict= OrderedDict(sorted(dict.items(), key=lambda t: t[0]))
-            result = xlsxFactory.create(sorted_dict)
+            sheet_list = json_decode(self.request.body)
+            result = xlsxFactory.create(sheet_list)
             self.write(result)
 
 application = tornado.web.Application([

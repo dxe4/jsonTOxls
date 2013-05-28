@@ -14,7 +14,8 @@ data = {'message':'hello world!', 'test':123.4}
 url = 'http://localhost:12345/'
 #payload = {'some': 'data'}
 headers = {'content-type': 'application/json'}
-content = {'A1': 'Item',#{'value':'Item'},
+sheet1 = {
+        'A1': 'Item',#{'value':'Item'},
         'B1':'Cost',
          #
         'A2':'Rent',
@@ -30,6 +31,8 @@ content = {'A1': 'Item',#{'value':'Item'},
         'B6':'=SUM(B1:B4)'
     }
 
-response = requests.post(url, data=json.dumps(content), headers=headers)
+sheet = [{"Test Sheet" :  sheet1}]
+
+response = requests.post(url, data=json.dumps(sheet), headers=headers)
 
 print(response.text)
