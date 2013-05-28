@@ -8,9 +8,11 @@ class MainHandler(tornado.web.RequestHandler):
     def post(self):
         content_type = self.request.headers.get("Content-Type", "")
         if content_type.startswith("application/json"):
-            sheet_list = json_decode(self.request.body)
-            result = xlsxFactory.create(sheet_list)
+            input = json_decode(self.request.body)
+            result = xlsxFactory.create(input)
             self.write(result)
+        else:
+            self.write("content_type should be set to application/json")
 
 application = tornado.web.Application([
     (r"/", MainHandler),
