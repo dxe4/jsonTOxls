@@ -1,15 +1,3 @@
-
-x=" "
-print((x.__class__))
-dict2 = {}
-print(dict2.__class__)
-if type(dict2) == dict:
-    print("dsa")
-def x():
-    print("x")
-xxx= {dict:x}
-foo = xxx[dict2.__class__]
-foo()
 def hello_world():
     sheet_data = {
         'A1':'Item',
