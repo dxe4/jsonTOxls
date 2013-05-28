@@ -25,8 +25,8 @@ def hello_world():
 
 def formats():
     sheet_data = {
-        'A1':'Item',
-        'B1':'Cost',
+        'A1':{'value':'Item','format':'bold'},
+        'B1':{'value':'Cost','format':'bold'},
          #
         'A2':'Rent',
         'A3':'Gas',
