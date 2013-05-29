@@ -1,8 +1,8 @@
 import tornado.ioloop
 import tornado.web
 from tornado.escape import json_decode
-import xlsxFactory
-from collections import OrderedDict
+from server import xlsxFactory
+
 
 class MainHandler(tornado.web.RequestHandler):
     def post(self):
