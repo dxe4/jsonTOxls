@@ -4,6 +4,7 @@ class InputHandler(object):
     def foo():
         print("dsadsa")
 
+    @staticmethod
     def init_formats(input,workbook):
         return_dict = {}
         if not input.__contains__('formats'):
@@ -12,6 +13,7 @@ class InputHandler(object):
             return_dict[k] = workbook.add_format(v)
         return return_dict
 
+    @staticmethod
     def get_args(value,formats):
         def is_dict():
             return value['value'],formats[value['format']]
