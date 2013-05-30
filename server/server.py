@@ -1,7 +1,7 @@
 import tornado.ioloop
 import tornado.web
 from tornado.escape import json_decode
-from server import xlsxFactory
+import xlsxFactory
 
 
 class MainHandler(tornado.web.RequestHandler):
