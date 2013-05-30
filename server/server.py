@@ -1,7 +1,7 @@
 import tornado.ioloop
 import tornado.web
 from tornado.escape import json_decode
-import xlsxFactory
+import xlsx_factory
 
 
 class MainHandler(tornado.web.RequestHandler):
@@ -9,7 +9,7 @@ class MainHandler(tornado.web.RequestHandler):
         content_type = self.request.headers.get("Content-Type", "")
         if content_type.startswith("application/json"):
             input = json_decode(self.request.body)
-            result = xlsxFactory.create(input)
+            result = xlsx_factory.create(input)
             self.write(result)
         else:
             self.write("content_type should be set to application/json")
