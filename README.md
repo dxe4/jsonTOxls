@@ -11,14 +11,14 @@ It works as basic functionality (add values, sheets and formats)
 ___
 Requires
 
-    *python3 (may work with 2 as well)
-    *and the libraries mentioned above
+    python3 (may work with 2 as well)
+    and the libraries mentioned above
 ___
 To run
 
-    *python3 server/server.py
-    *python3 client/client.py
+    python3 server/server.py
+    python3 client/client.py
 
 Json examples 
 
-     *client/examples.py
+    client/examples.py
