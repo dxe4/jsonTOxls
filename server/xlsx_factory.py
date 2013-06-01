@@ -3,6 +3,7 @@ from collections import OrderedDict
 from input_factory import InputHandler
 
 filename = 'sample.xlsx'
+
 def create(input):
     """
     Creates the xls file
@@ -29,6 +30,7 @@ def processSheet(workbook,sheetName,formats):
         sheet = workbook.add_worksheet(k)
         addCells(sheet,sorted_dict,formats)
 
+
 def addCells(sheet,sorted_dict,formats):
     """
     Add cell data to the sheet
@@ -37,12 +39,11 @@ def addCells(sheet,sorted_dict,formats):
     :param formats: Dictionary of string:cell_format as processed by input factory
     """
     for k,v in sorted_dict.items():
-        args = InputHandler.get_args(v,formats)
-        def is_tuple():
-            sheet.write(k,*args)#'B3':{'value':'123.52','format':'number_bold_red'},
-        def is_str():
-            sheet.write(k,v)#'B2':'1000.10',
-        functions = {tuple:is_tuple,str:is_str}
-        functions[args.__class__]()
+        new_value = InputHandler.get_args(v,formats)
+        new_key = InputHandler.parse_cell_position(k)
+        args = new_key+new_value
+        sheet.write(*args)#'B2':'1000.10'
+
+
 
 

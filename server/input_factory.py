@@ -34,6 +34,16 @@ class InputHandler(object):
         def is_dict():
             return value['value'],formats[value['format']]
         def is_str():
-            return value
+            return (value,)
         functions = {dict:is_dict,str:is_str}
         return functions[value.__class__]()
+
+    def parse_cell_position(k):
+        """
+        Parse the cell position. Allows you to add cells in format A1,B1 or 0,1 0,1
+        :return: cell position as tuple examples: (A1) (0,1)
+        """
+        if "," in k:
+            return tuple(int(n) for n in k.split(","))
+        else:
+            return (k,)
