@@ -28,7 +28,7 @@ def hello_world():
 def formats():
     sheet_data = {
         'A1':{'value':'Item','format':'bold'},
-        'B1':{'value':'Cost','format':'bold'}, #2013-01-13
+        'B1':{'value':'Cost','format':'bold'},
         'C1':{'value':'Date','format':'bold'},
          #
         '1,0':'Rent',
@@ -42,17 +42,18 @@ def formats():
         '3,1':{'value':'330.90','format':'number_bold_red'},
         '4,1':{'value':'80.55','format':'number_bold_red'},
         '5,1':{'value':'=SUM(B2:B5)','format':'sum_format'},
-
+        #
         '1,2':{'date':'2013-01-01','format':'date_format'},
         '2,2':{'date':'2013-02-01','format':'date_format'},
         '3,2':{'date':'2013-03-01','format':'date_format2'},
         '4,2':{'date':'2013-04-01','format':'date_format2'},
-
+        #
         "conditional_formats" : {
             'B2:B5': {
                     'type':'cell','criteria': '>=','value':    300, 'format':   'number_bold_blue'
             }
         },
+        #
         "column_size":{
              'A:B': 15,
              'C:C':25
@@ -64,11 +65,13 @@ def formats():
             {"Test Sheet" :  sheet_data},
         ],
         "formats" : {
-            'number' : {'num_format':'$#,##.##'} ,
             'bold' : {'bold':True},
             'bold_red' : {'bold': True, 'font_color': 'red'},
+            #
+            'number' : {'num_format':'$#,##.##'} ,
             'number_bold_red' : {'bold': True, 'font_color': 'red','num_format':'$#,##.##'},
             'number_bold_blue' : {'bold': True, 'font_color': 'red','bg_color': '#99CCFF','num_format':'$#,##.##'},
+            #
             'sum_format' : {'bold':True,'bg_color':'#E9AA94'},
             'date_format':{'num_format': 'yyyy d mmmm'},
             'date_format2':{'num_format': 'yy dd mmm'}
