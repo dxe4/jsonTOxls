@@ -112,3 +112,7 @@ def example3_formats_more():
         }
     }
     return sheet
+
+
+
+functions = {"1":example1_hello_world(),"2":example2_formats_simple(),"3":example3_formats_more()}

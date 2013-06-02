@@ -3,7 +3,7 @@ import tornado.web
 from tornado.escape import json_decode
 import traceback,sys
 import xlsx_factory
-
+from input_factory import InputHandler
 
 class MainHandler(tornado.web.RequestHandler):
     def post(self):

@@ -2,8 +2,6 @@ from xlsxwriter.workbook import Workbook
 from collections import OrderedDict
 from input_factory import InputHandler
 
-filename = 'sample.xlsx'
-
 
 def create(input):
     """
@@ -11,6 +9,7 @@ def create(input):
     :param input: the json given after its decoded
     :return: return the file name of the file created.
     """
+    filename = InputHandler.pop_dict(input,"filename")
     workbook = Workbook(filename)
     formats = InputHandler.init_formats(input,workbook)
     for sheet in input['sheets']:
