@@ -12,7 +12,7 @@ def hello_world():
         'B2':'1000.10',
         'B3':'100.11',
         'B4':'300.50',
-        'B5':'50.0',#'format':{'num_format': '$#,##.##'}
+        'B5':'50.0',
         'B6':'=SUM(B1:B4)'
     }
 
@@ -34,10 +34,10 @@ def formats():
         'A5':'Gym',
         'A6':'Total',
          #
-        'B2':{'value':'500','format':'number_bold_red'},
-        'B3':{'value':'150','format':'number_bold_red'},
-        'B4':{'value':'330','format':'number_bold_red'},
-        'B5':{'value':'80','format':'number_bold_red'},
+        'B2':{'value':'500.50','format':'number_bold_red'},
+        'B3':{'value':'150.88','format':'number_bold_red'},
+        'B4':{'value':'330.90','format':'number_bold_red'},
+        'B5':{'value':'80.55','format':'number_bold_red'},
         'B6':{'value':'=SUM(B2:B5)','format':'sum_format'},
 
         "conditional_formats" : {
