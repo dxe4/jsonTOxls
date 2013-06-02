@@ -1,6 +1,6 @@
 import json
 import requests
-import examples
+from examples import examples
 
 
 url = 'http://localhost:12345/'
