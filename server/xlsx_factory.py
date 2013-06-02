@@ -60,6 +60,8 @@ def add_conditional_formats(conditional_formats,formats,worksheet):
     :param formats: The map of formats as given by json.
     :param worksheet: The current worksheet.
     """
+    if not conditional_formats:
+        return
     for k,v in conditional_formats.items():
         v["format"] = formats.get(v.get("format"))#replace format value with actual format - see json.
         worksheet.conditional_format(k,v)
@@ -70,5 +72,7 @@ def resize_columns(column_sizes,worksheet):
     :param column_sizes: Map from range (A:B) to value (15).
     :param worksheet: The current worksheet.
     """
+    if not column_sizes:
+        return
     for k,v in column_sizes.items():
         worksheet.set_column(k,v)
