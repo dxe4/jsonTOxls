@@ -4,6 +4,7 @@ from input_factory import InputHandler
 
 filename = 'sample.xlsx'
 
+
 def create(input):
     """
     Creates the xls file
@@ -13,37 +14,42 @@ def create(input):
     workbook = Workbook(filename)
     formats = InputHandler.init_formats(input,workbook)
     for sheet in input['sheets']:
-        processSheet(workbook,sheet,formats)
+        process_sheet(workbook,sheet,formats)
     workbook.close()
     return filename
 
 
-def processSheet(workbook,sheetName,formats):
+def process_sheet(workbook,sheet,formats):
     """
     Create sheet and add the data given
     :param workbook: The workbook created for this request
-    :param sheetName: The sheetName as given in the json
+    :param sheet: The sheetName as given in the json
     :param formats: Dictionary of string:cell_format as processed by input factory
     """
-    for k,v in sheetName.items():
+
+    for k,v in sheet.items():
         sorted_dict= OrderedDict(sorted(v.items(), key=lambda t: t[0]))#sort may be important when adding formulas,rely on correct input
-        sheet = workbook.add_worksheet(k)
-        addCells(sheet,sorted_dict,formats)
+        worksheet = workbook.add_worksheet(k)
+        add_cells(worksheet,sorted_dict,formats)
 
 
-def addCells(sheet,sorted_dict,formats):
+def add_cells(sheet,sorted_dict,formats):
     """
     Add cell data to the sheet
     :param sheet: The current sheet
     :param sorted_dict: The cell values as given by user
     :param formats: Dictionary of string:cell_format as processed by input factory
     """
+    conditional_formats = sorted_dict.pop("conditional_formats")
     for k,v in sorted_dict.items():
         new_value = InputHandler.get_args(v,formats)
         new_key = InputHandler.parse_cell_position(k)
         args = new_key+new_value
         sheet.write(*args)#'B2':'1000.10'
+    add_conditional_formats(conditional_formats,formats,sheet)
 
 
-
-
+def add_conditional_formats(conditional_formats,formats,worksheet):
+    for k,v in conditional_formats.items():
+        v["format"] = formats.get(v.get("format"))
+        worksheet.conditional_format(k,v)
