@@ -44,6 +44,9 @@ def formats():
             'B2:B5': {
                     'type':'cell','criteria': '>=','value':    300, 'format':   'number_bold_blue'
             }
+        },
+        "column_size":{
+             'A:B': 15
         }
     }
 

@@ -40,16 +40,24 @@ def add_cells(sheet,sorted_dict,formats):
     :param sorted_dict: The cell values as given by user
     :param formats: Dictionary of string:cell_format as processed by input factory
     """
-    conditional_formats = sorted_dict.pop("conditional_formats")
+    conditional_formats = InputHandler.pop_dict(sorted_dict,"conditional_formats")
+    column_sizes = InputHandler.pop_dict(sorted_dict,"column_size")
+
     for k,v in sorted_dict.items():
         new_value = InputHandler.get_args(v,formats)
         new_key = InputHandler.parse_cell_position(k)
         args = new_key+new_value
         sheet.write(*args)#'B2':'1000.10'
+
     add_conditional_formats(conditional_formats,formats,sheet)
+    resize_columns(column_sizes,sheet)
 
 
 def add_conditional_formats(conditional_formats,formats,worksheet):
     for k,v in conditional_formats.items():
         v["format"] = formats.get(v.get("format"))
         worksheet.conditional_format(k,v)
+
+def resize_columns(column_sizes,worksheet):
+    for k,v in column_sizes.items():
+        worksheet.set_column(k,v)
