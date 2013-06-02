@@ -34,11 +34,11 @@ def formats():
         'A5':'Gym',
         'A6':'Total',
          #
-        'B2':'100',
-        'B3':{'value':'200','format':'number_bold_red'},
-        'B4':{'value':'300','format':'number_bold_red'},
-        'B5':{'value':'600','format':'number_bold_red'}  ,#'format':{'num_format': '$#,##.##'}
-        'B6':'=SUM(B2:B5)',
+        'B2':{'value':'500','format':'number_bold_red'},
+        'B3':{'value':'150','format':'number_bold_red'},
+        'B4':{'value':'330','format':'number_bold_red'},
+        'B5':{'value':'80','format':'number_bold_red'},
+        'B6':{'value':'=SUM(B2:B5)','format':'sum_format'},
 
         "conditional_formats" : {
             'B2:B5': {
@@ -56,7 +56,8 @@ def formats():
             'bold' : {'bold':True},
             'bold_red' : {'bold': True, 'font_color': 'red'},
             'number_bold_red' : {'bold': True, 'font_color': 'red','num_format':'$#,##.##'},
-            'number_bold_blue' : {'bold': True, 'font_color': 'blue','num_format':'$#,##.##'}
+            'number_bold_blue' : {'bold': True, 'font_color': 'red','bg_color': '#99CCFF','num_format':'$#,##.##'},
+            'sum_format' : {'bold':True,'bg_color':'#E9AA94'}
         }
     }
     return sheet
