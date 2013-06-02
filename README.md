@@ -19,7 +19,7 @@ To run
     python3 server/server.py
     python3 client/client.py
 
-Json examples 
+Json and XLS examples in
 
-    client/examples.py
+    client/examples
 
