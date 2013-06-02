@@ -1,5 +1,8 @@
 import datetime
+
+
 class InputHandler(object):
+
 
     @staticmethod
     def init_formats(input,workbook):
@@ -20,6 +23,7 @@ class InputHandler(object):
         for k,v in input.pop('formats').items():
             return_dict[k] = workbook.add_format(v)
         return return_dict
+
 
     @staticmethod
     def get_args(value,formats):
@@ -54,6 +58,8 @@ class InputHandler(object):
             return tuple(int(n) for n in k.split(","))
         else:
             return (k,)
+
+
 
     @staticmethod
     def pop_dict(dictionary,value):
