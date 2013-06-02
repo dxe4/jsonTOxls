@@ -11,9 +11,9 @@ def example1_hello_world():
         'A5':'Gym',
         'A6':'Total',
          #
-        'B2':'1000.10',
-        'B3':'100.11',
-        'B4':'300.50',
+        'B2':'10.10',
+        'B3':'100.1',
+        'B4':'300.5',
         'B5':'50.0',
         'B6':'=SUM(B1:B4)'
     }
@@ -36,9 +36,9 @@ def example2_formats_simple():
         '4,0':'Gym',
         '5,0':'Total',
          #
-        '1,1':{'value':'500.50','format':'number_bold_red'},
-        '2,1':{'value':'150.88','format':'number_bold_red'},
-        '3,1':{'value':'330.90','format':'number_bold_red'},
+        '1,1':{'value':'50.50','format':'number_bold_red'},
+        '2,1':{'value':'15.88','format':'number_bold_red'},
+        '3,1':{'value':'33.90','format':'number_bold_red'},
         '4,1':{'value':'80.55','format':'number_bold_red'},
         '5,1':{'value':'=SUM(B2:B5)','format':'number_bold_red'}
     }
