@@ -1,0 +1,18 @@
+Just to keep track of features added and to be added.
+
+DONE:
+- Send json request to create simple xls file
+- Add Cell formats (colors,fonts,dates,bold etc)
+- Add conditional formatting (highlight all cells in column A that have value < 50
+- Resize columns
+
+TODO:
+- Easy:
+    - Add tutorials how to use
+    - Add realistic/more complicated examples
+    - Create clients for other languages
+    - Return xls file to the client, or url to the xls file (user can choose)
+
+- More Challenging:
+    - Add charts
+    - Add Worksheet Tables
