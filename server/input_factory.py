@@ -47,3 +47,10 @@ class InputHandler(object):
             return tuple(int(n) for n in k.split(","))
         else:
             return (k,)
+
+    @staticmethod
+    def pop_dict(dictionary,value):
+        if value in dictionary:
+            return dictionary.pop(value)
+        else:
+            return None
