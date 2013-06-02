@@ -25,7 +25,6 @@ def process_sheet(workbook,sheet,formats):
     :param sheet: The sheetName as given in the json.
     :param formats: Dictionary of string:cell_format as processed by input factory.
     """
-
     for k,v in sheet.items():
         sorted_dict= OrderedDict(sorted(v.items(), key=lambda t: t[0]))#sort may be important when adding formulas,rely on correct input
         worksheet = workbook.add_worksheet(k)
@@ -59,8 +58,6 @@ def add_conditional_formats(conditional_formats,formats,worksheet):
     :param formats: The map of formats as given by json.
     :param worksheet: The current worksheet.
     """
-    if not conditional_formats:
-        return
     for k,v in conditional_formats.items():
         v["format"] = formats.get(v.get("format"))#replace format value with actual format - see json.
         worksheet.conditional_format(k,v)
@@ -71,7 +68,5 @@ def resize_columns(column_sizes,worksheet):
     :param column_sizes: Map from range (A:B) to value (15).
     :param worksheet: The current worksheet.
     """
-    if not column_sizes:
-        return
     for k,v in column_sizes.items():
         worksheet.set_column(k,v)

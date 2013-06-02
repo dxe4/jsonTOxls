@@ -18,9 +18,10 @@ class InputHandler(object):
         :return: Empty dict if no formats are set on JSON, dict format_name : format if formats are specified
         """
         return_dict = {}
-        if not input.__contains__('formats'):
-            return return_dict
-        for k,v in input.pop('formats').items():
+        # if not input.__contains__('formats'):
+        #     return return_dict
+
+        for k,v in InputHandler.pop_dict(input,"formats").items():
             return_dict[k] = workbook.add_format(v)
         return return_dict
 
@@ -35,7 +36,6 @@ class InputHandler(object):
         :return: If only a value given the value is returned else the value of the cell is returned and a the specified
             format
         """
-
         def is_dict():
             key = "value" if "value" in value else "date"
             if "date" == key:
@@ -60,7 +60,6 @@ class InputHandler(object):
             return (k,)
 
 
-
     @staticmethod
     def pop_dict(dictionary,key):
         """
@@ -72,4 +71,4 @@ class InputHandler(object):
         if key in dictionary:
             return dictionary.pop(key)
         else:
-            return None
+            return {}
