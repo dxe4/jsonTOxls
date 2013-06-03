@@ -1,10 +1,8 @@
 jsonTOxls
 =========
 
-create xls files using json requests
-___
-
-The goal is to create a tornado (http://www.tornadoweb.org/en/stable/) server which takes json requests and creates .xls/.xlsx files (https://github.com/jmcnamara/XlsxWriter)
+Create Excel files using json requests. A tornado server (http://www.tornadoweb.org/en/stable/) that accepts json requests to create xls,xlsx files using XlsxWriter (https://github.com/jmcnamara/XlsxWriter).
+Both client and server build in python but the client can be written in any language.
 
 ___
 It works as basic functionality (add values, sheets and formats)
