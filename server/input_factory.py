@@ -18,9 +18,6 @@ class InputHandler(object):
         :return: Empty dict if no formats are set on JSON, dict format_name : format if formats are specified
         """
         return_dict = {}
-        # if not input.__contains__('formats'):
-        #     return return_dict
-
         for k,v in InputHandler.pop_dict(input,"formats").items():
             return_dict[k] = workbook.add_format(v)
         return return_dict
