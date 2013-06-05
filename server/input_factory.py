@@ -7,7 +7,7 @@ class InputHandler(object):
     @staticmethod
     def init_formats(input,workbook):
         """
-        Handles the cell formats is any. Json should have on the dictionary a formats key in order to create formats.
+        Handles the cell formats if any. Json should have on the dictionary a formats key in order to create formats.
         If formats value doesnt exist return empty dict of formats, else add all formats in a dict.
         Structure:
             "formats" : {
