@@ -5,6 +5,8 @@ class Node:
         self.children = children
         self.parent = parent
         self.data = data
+        if parent:
+            parent.children.append(self)
 
     def __str__(self):
         return "info:%s children:%s data:%s" % (self.info, self.children, self.data)
