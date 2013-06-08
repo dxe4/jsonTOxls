@@ -7,7 +7,7 @@ class Node:
         self.data = data
 
     def __str__(self):
-        return "info:%s children:%s parent: %s data:%s" % (self.info, self.children, self.parent,self.data)
+        return "info:%s children:%s data:%s" % (self.info, self.children, self.data)
 
     def __repr__(self):
         return str(self.info)
@@ -15,11 +15,12 @@ class Node:
 
 class Tree:
 
-    def __init__(self,root=Node()):
+    def __init__(self,root=Node(data="root")):
         self.root = root
 
     def __str__(self):
         return self.root
+
 
 
 if __name__ == "__main__":

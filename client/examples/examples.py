@@ -1,4 +1,5 @@
 import datetime
+from multiprocessing.dummy import active_children
 from tree import Tree,Node
 import random
 import os.path
@@ -138,9 +139,6 @@ def example3_formats_more():
 
 
 def example4_realistic():
-    locations = read_file("locations")
-    location_1 = random_list_item(locations)
-    location_2 = random_list_item(locations)
 
     def random_dates():
         date_1 = datetime.date(2003, random.randrange(1,12), random.randrange(1,28))
@@ -155,12 +153,26 @@ def example4_realistic():
         for i in range(1,7):
             companies.append(random.randrange(1,10))
 
-    companies = random_dates()
-    depart_date,arrive_date = random_dates()
+    def create_header(parent,departure_location,arrival_location,companies,departure_date,arrival_date):
+        data={"Departure":departure_location,"Arrival":arrival_location,"Departure Date":departure_date,"Arrival Date":arrival_date,"companies":companies}
+        node = Node(parent=parent,data=data,info ="header",children=[])
+        tree.root.children.append(node)
+        print(node)
+
+
+    def create_data():
+        for i in range(1,10):
+            departure_location,arrival_location = random_list_item(locations),random_list_item(locations)
+            companies = random_companies()
+            depart_date,arrive_date = random_dates()
+            create_header(tree.root,departure_location,arrival_location,companies,depart_date,arrive_date)
+
     tree = Tree()
+    locations = read_file("locations")
+    create_data()
+
+
 
 example4_realistic()
-
-
 
 functions = {"1":example1_hello_world(),"2":example2_formats_simple(),"3":example3_formats_more()}
