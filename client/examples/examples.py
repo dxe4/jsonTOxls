@@ -1,4 +1,25 @@
 import datetime
+from tree import Tree,Node
+import random
+import os.path
+import sys
+from random import randrange
+from datetime import timedelta
+
+
+def read_file(file_name):
+    file_path = os.path.join(os.path.dirname(__file__),file_name)
+    file = open(file_path,"r")
+    file_lines = []
+    for line in file:
+        file_lines.append(line.replace("\n",""))
+    return file_lines
+
+
+def random_list_item(list):
+    index = random.randrange(0,list.__len__())
+    return list[index]
+
 
 def example1_hello_world():
     sheet_data = {
@@ -24,6 +45,7 @@ def example1_hello_world():
         ]
     }
     return sheet
+
 
 def example2_formats_simple():
     sheet_data = {
@@ -58,6 +80,7 @@ def example2_formats_simple():
         }
     }
     return sheet
+
 
 def example3_formats_more():
     sheet_data = {
@@ -112,6 +135,31 @@ def example3_formats_more():
         }
     }
     return sheet
+
+
+def example4_realistic():
+    locations = read_file("locations")
+    location_1 = random_list_item(locations)
+    location_2 = random_list_item(locations)
+
+    def random_dates():
+        date_1 = datetime.date(2003, random.randrange(1,12), random.randrange(1,28))
+        date_2 = datetime.date(2003, random.randrange(1,12), random.randrange(1,28))
+        if date_1 if date_1 < date_2 else date_2:
+            return date_1,date_2
+        else:
+            return date_2,date_1
+
+    def random_companies():
+        companies = []
+        for i in range(1,7):
+            companies.append(random.randrange(1,10))
+
+    companies = random_dates()
+    depart_date,arrive_date = random_dates()
+    tree = Tree()
+
+example4_realistic()
 
 
 
