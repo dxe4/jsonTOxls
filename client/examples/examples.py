@@ -141,24 +141,28 @@ def example3_formats_more():
 def example4_realistic():
 
     def random_dates():
-        date_1 = datetime.date(2003, random.randrange(1,12), random.randrange(1,28))
-        date_2 = datetime.date(2003, random.randrange(1,12), random.randrange(1,28))
+        date_1 = datetime.date(2013, random.randrange(1,12), random.randrange(1,28))
+        date_2 = datetime.date(2013, random.randrange(1,12), random.randrange(1,28))
         if date_1 if date_1 < date_2 else date_2:
             return date_1,date_2
         else:
             return date_2,date_1
 
     def random_companies():
-        companies = []
-        for i in range(1,7):
-            companies.append(random.randrange(1,10))
+        def random_price():
+            if random.randrange(1,4) > 1:
+                return "%.2f" % random.uniform(50.00,499.99)
+            else:
+                return None
+        companies = {}
+        for i in range(2,8):
+            companies["company " + str(random.randrange(1,10))]=random_price()
+        return companies
 
     def create_header(parent,departure_location,arrival_location,companies,departure_date,arrival_date):
         data={"Departure":departure_location,"Arrival":arrival_location,"Departure Date":departure_date,"Arrival Date":arrival_date,"companies":companies}
         node = Node(parent=parent,data=data,info ="header",children=[])
         tree.root.children.append(node)
-        print(node)
-
 
     def create_data():
         for i in range(1,10):
