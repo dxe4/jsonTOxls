@@ -11,9 +11,14 @@ class ReportIterator:
     def __next__(self):
         self.start=self.start+1;
         if self.start > self.end:
-            self.start=self._start
+            self.reset()
             raise StopIteration
         return self.start
 
     def next_child(self):
         self.child_iterator.__next__()
+
+    def reset(self):
+        self.start = self._start
+        if self.child_iterator:
+            self.child_iterator.reset()
