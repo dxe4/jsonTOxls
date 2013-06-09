@@ -6,6 +6,7 @@ import os.path
 import sys
 from random import randrange
 from datetime import timedelta
+from report_iterator import ReportIterator
 
 
 def read_file(file_name):
@@ -162,7 +163,6 @@ def example4_realistic():
     def create_header(parent,departure_location,arrival_location,companies,departure_date,arrival_date):
         data={"Departure":departure_location,"Arrival":arrival_location,"Departure Date":departure_date,"Arrival Date":arrival_date,"companies":companies}
         node = Node(parent=parent,data=data,info ="header",children=[])
-        tree.root.children.append(node)
 
     def create_data():
         for i in range(1,10):
@@ -175,6 +175,11 @@ def example4_realistic():
     locations = read_file("locations")
     create_data()
 
+    report_iterator = ReportIterator(end=10,child_iterator = ReportIterator(end=10))
+    for row in report_iterator:
+
+        for col in report_iterator.child_iterator:
+            print("row " + str(row),"col " + str(col))
 
 
 example4_realistic()
