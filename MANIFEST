@@ -2,6 +2,10 @@
 setup.py
 client/__init__.py
 client/client.py
+client/examples/__init__.py
+client/examples/examples.py
+client/examples/report_iterator.py
+client/examples/tree.py
 server/__init__.py
 server/input_factory.py
 server/server.py
