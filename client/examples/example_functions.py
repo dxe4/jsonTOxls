@@ -209,13 +209,13 @@ def example4_realistic():
         sheet[str(row)+","+str(col)] = "Departure"
         row,col = row,col+1
         sheet[str(row)+","+str(col)] = departure
-        row,col = row+1,col+1
-        break;
+        row,col = row+1,col-1
+
         report_iterator = ReportIterator(end=len(dates),child_iterator = ReportIterator(end=len(companies)))
         # for row in report_iterator:
         #     for col in report_iterator.child_iterator:
         #         print("row " + str(row),"col " + str(col))
-    print({"sheets":[{"sheet":sheet}]})
+
     return {"sheets":[{"sheet":sheet}]}
 example4_realistic()
 
