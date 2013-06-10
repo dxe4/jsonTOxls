@@ -160,24 +160,19 @@ def example4_realistic():
             companies["company " + str(random.randrange(1,10))]=random_price()
         return companies
 
-    def create_header(parent,departure_location,arrival_location,companies,departure_date,arrival_date):
-        data={"Departure":departure_location,"Arrival":arrival_location,"Departure Date":departure_date,"Arrival Date":arrival_date,"companies":companies}
-        node = Node(parent=parent,data=data,info ="header",children=[])
-
-    def create_data():
+    def create_data(data):
         for i in range(1,10):
             departure_location,arrival_location = random_list_item(locations),random_list_item(locations)
             companies = random_companies()
-            depart_date,arrive_date = random_dates()
-            create_header(tree.root,departure_location,arrival_location,companies,depart_date,arrive_date)
+            departure_date,arrival_date = random_dates()
+            data[i]={"Departure":departure_location,"Arrival":arrival_location,"Departure Date":departure_date,"Arrival Date":arrival_date,"companies":companies}
 
-    tree = Tree()
+    data = {}
     locations = read_file("locations")
-    create_data()
-
+    create_data(data)
+    print(data)
     report_iterator = ReportIterator(end=10,child_iterator = ReportIterator(end=10))
     for row in report_iterator:
-
         for col in report_iterator.child_iterator:
             print("row " + str(row),"col " + str(col))
 
