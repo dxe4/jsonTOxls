@@ -149,28 +149,47 @@ def example4_realistic():
         else:
             return date_2,date_1
 
-    def random_companies():
+    def random_days_list():
+        date_list=[]
+        for i in range(1,10):
+            departure_date,arrival_date = random_dates()
+            date_list.append({"departure":departure_date,"arrival":arrival_date})
+        return date_list
+
+    def random_companies(dates):
+
         def random_price():
             if random.randrange(1,4) > 1:
                 return "%.2f" % random.uniform(50.00,499.99)
             else:
                 return None
+
+        def random_prices():
+            price_map ={}
+            for date in dates:
+                for k,v in date.items():
+                    price_map[v] = random_price()
+            return price_map
+
         companies = {}
         for i in range(2,8):
-            companies["company " + str(random.randrange(1,10))]=random_price()
+            company_key = "company " + str(random.randrange(1,10))
+            companies[company_key]=random_prices()
         return companies
 
     def create_data(data):
         for i in range(1,10):
             departure_location,arrival_location = random_list_item(locations),random_list_item(locations)
-            companies = random_companies()
-            departure_date,arrival_date = random_dates()
-            data[i]={"Departure":departure_location,"Arrival":arrival_location,"Departure Date":departure_date,"Arrival Date":arrival_date,"companies":companies}
+            dates = random_days_list()
+            companies = random_companies(dates)
+            data[i]={"Departure":departure_location,"Arrival":arrival_location,"dates":dates,"companies":companies}
 
     data = {}
     locations = read_file("locations")
     create_data(data)
-    print(data)
+    sheets=[]
+
+
     report_iterator = ReportIterator(end=10,child_iterator = ReportIterator(end=10))
     for row in report_iterator:
         for col in report_iterator.child_iterator:
