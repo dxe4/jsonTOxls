@@ -25,6 +25,7 @@ def process_sheet(workbook,sheet,formats):
     :param sheet: The sheetName as given in the json.
     :param formats: Dictionary of string:cell_format as processed by input factory.
     """
+
     for k,v in sheet.items():
         sorted_dict= OrderedDict(sorted(v.items(), key=lambda t: t[0]))#sort may be important when adding formulas,rely on correct input
         worksheet = workbook.add_worksheet(k)

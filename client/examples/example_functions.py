@@ -1,12 +1,14 @@
+import os.path, sys
+sys.path.append(os.path.dirname(__file__))
 import datetime
 from multiprocessing.dummy import active_children
-from tree import Tree,Node
 import random
 import os.path
 import sys
 from random import randrange
 from datetime import timedelta
 from report_iterator import ReportIterator
+
 
 
 def read_file(file_name):
@@ -189,13 +191,32 @@ def example4_realistic():
     create_data(data)
     sheets=[]
 
+    json_data={}
+    sheet={}
+    row = 0
+    col = 0
+    for k,v in data.items():
 
-    report_iterator = ReportIterator(end=10,child_iterator = ReportIterator(end=10))
-    for row in report_iterator:
-        for col in report_iterator.child_iterator:
-            print("row " + str(row),"col " + str(col))
+        departure = v["Departure"]
+        arrival = v["Arrival"]
+        dates = v["dates"]
+        companies = v["companies"]
 
-
+        sheet[str(row)+","+str(col)] = "Arrival"
+        row,col = row,col+1
+        sheet[str(row)+","+str(col)] = arrival
+        row,col = row+1,col-1
+        sheet[str(row)+","+str(col)] = "Departure"
+        row,col = row,col+1
+        sheet[str(row)+","+str(col)] = departure
+        row,col = row+1,col+1
+        break;
+        report_iterator = ReportIterator(end=len(dates),child_iterator = ReportIterator(end=len(companies)))
+        # for row in report_iterator:
+        #     for col in report_iterator.child_iterator:
+        #         print("row " + str(row),"col " + str(col))
+    print({"sheets":[{"sheet":sheet}]})
+    return {"sheets":[{"sheet":sheet}]}
 example4_realistic()
 
-functions = {"1":example1_hello_world(),"2":example2_formats_simple(),"3":example3_formats_more()}
+functions = {"1":example1_hello_world(),"2":example2_formats_simple(),"3":example3_formats_more(),"4":example4_realistic()}
