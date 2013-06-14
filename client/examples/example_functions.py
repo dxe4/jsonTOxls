@@ -6,7 +6,7 @@ import random
 import os.path
 import sys
 from random import randrange
-from datetime import timedelta
+from datetime import timedelta,time
 from report_iterator import ReportIterator
 
 
@@ -151,11 +151,17 @@ def example4_realistic():
         else:
             return date_2,date_1
 
-    def random_days_list():
-        date_list=[]
+    def random_days_dict():
+        date_list={}
+        departure_list = []
+        arrival_list = []
         for i in range(1,10):
             departure_date,arrival_date = random_dates()
-            date_list.append({"departure":departure_date,"arrival":arrival_date})
+            departure_list.append(departure_date)
+            arrival_list.append(arrival_date)
+
+        date_list["departure"] = departure_list
+        date_list["arrival"] = arrival_list
         return date_list
 
     def random_companies(dates):
@@ -168,9 +174,10 @@ def example4_realistic():
 
         def random_prices():
             price_map ={}
-            for date in dates:
-                for k,v in date.items():
-                    price_map[v] = random_price()
+
+            for k,v in dates.items():
+                for date in v:
+                    price_map[date] = random_price()
             return price_map
 
         companies = {}
@@ -182,7 +189,7 @@ def example4_realistic():
     def create_data(data):
         for i in range(1,10):
             departure_location,arrival_location = random_list_item(locations),random_list_item(locations)
-            dates = random_days_list()
+            dates = random_days_dict()
             companies = random_companies(dates)
             data[i]={"Departure":departure_location,"Arrival":arrival_location,"dates":dates,"companies":companies}
 
@@ -219,7 +226,15 @@ def example4_realistic():
             col=col+1
             print(sheet)
         col=0
-        row=row+2
+        row=row+1
+        for k,v in dates.items():
+            sheet[str(row)+","+str(col)] = k
+            row = row+1
+            for date in v:
+                sheet[str(row)+","+str(col)] = date.strftime( '%m/%d/%Y')
+                row=row+1
+            row = row+1
+        row = row + 1
 
         # for row in report_iterator:
         #     for col in report_iterator.child_iterator:
