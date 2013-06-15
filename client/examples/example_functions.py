@@ -8,6 +8,7 @@ import sys
 from random import randrange
 from datetime import timedelta,time
 from report_iterator import ReportIterator
+from example_data import Example4
 
 
 
@@ -20,9 +21,7 @@ def read_file(file_name):
     return file_lines
 
 
-def random_list_item(list):
-    index = random.randrange(0,list.__len__())
-    return list[index]
+
 
 
 def example1_hello_world():
@@ -143,59 +142,10 @@ def example3_formats_more():
 
 def example4_realistic():
 
-    def random_dates():
-        date_1 = datetime.date(2013, random.randrange(1,12), random.randrange(1,28))
-        date_2 = datetime.date(2013, random.randrange(1,12), random.randrange(1,28))
-        if date_1 if date_1 < date_2 else date_2:
-            return date_1,date_2
-        else:
-            return date_2,date_1
-
-    def random_days_dict():
-        date_list={}
-        departure_list = []
-        arrival_list = []
-        for i in range(1,10):
-            departure_date,arrival_date = random_dates()
-            departure_list.append(departure_date)
-            arrival_list.append(arrival_date)
-
-        date_list["departure"] = departure_list
-        date_list["arrival"] = arrival_list
-        return date_list
-
-    def random_companies(dates):
-
-        def random_price():
-            if random.randrange(1,4) > 1:
-                return "%.2f" % random.uniform(50.00,499.99)
-            else:
-                return None
-
-        def random_prices():
-            price_map ={}
-
-            for k,v in dates.items():
-                for date in v:
-                    price_map[date] = random_price()
-            return price_map
-
-        companies = {}
-        for i in range(2,8):
-            company_key = "company " + str(random.randrange(1,10))
-            companies[company_key]=random_prices()
-        return companies
-
-    def create_data(data):
-        for i in range(1,10):
-            departure_location,arrival_location = random_list_item(locations),random_list_item(locations)
-            dates = random_days_dict()
-            companies = random_companies(dates)
-            data[i]={"Departure":departure_location,"Arrival":arrival_location,"dates":dates,"companies":companies}
-
     data = {}
     locations = read_file("locations")
-    create_data(data)
+    example4 = Example4(locations)
+    data = example4.create_data()
     sheets=[]
 
     json_data={}
@@ -223,18 +173,19 @@ def example4_realistic():
 
         for k,v in companies.items():
             sheet[str(row)+","+str(col)] = k
-            col=col+1
-            print(sheet)
-        col=0
-        row=row+1
+            col += 1
+
+        col = 0
+        row += 1
         for k,v in dates.items():
             sheet[str(row)+","+str(col)] = k
-            row = row+1
+            row += 1
             for date in v:
                 sheet[str(row)+","+str(col)] = date.strftime( '%m/%d/%Y')
-                row=row+1
-            row = row+1
-        row = row + 1
+                row += 1
+        row += 1
+
+        print(sheet)
 
         # for row in report_iterator:
         #     for col in report_iterator.child_iterator:
