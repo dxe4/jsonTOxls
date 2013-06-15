@@ -62,7 +62,7 @@ class Example4:
                 price_list.append({date:self.random_price()})
         return price_map
 
-    def random_price(self,min = 50.00,max = 499.99):
+    def random_price(self, min=50.00, max=499.99):
         """
         Creates a random float used as a price with 2 decimal points
         :param min: default 50.00
