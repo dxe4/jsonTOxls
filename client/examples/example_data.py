@@ -25,15 +25,11 @@ class Example4:
         Create random dates
         :return: dates map Arrival:[date]
         """
-        date_dict = {}
-        departure_list = []
-        arrival_list = []
+        date_dict, departure_list, arrival_list = {}, [], []
+        lambda_add = lambda list1, list2, arg1, arg2: (list1.append(arg1), list2.append(arg2))
         for i in range(1, 10):
-            departure_date, arrival_date = dates.random_dates_sorted(year=2013)
-            departure_list.append(departure_date)
-            arrival_list.append(arrival_date)
-        date_dict["Departure"] = departure_list
-        date_dict["Arrival"] = arrival_list
+            lambda_add(departure_list, arrival_list, *dates.random_dates_sorted(year=2013))
+        date_dict["Departure"],date_dict["Arrival"] = departure_list,arrival_list
         return date_dict
 
     def random_companies(self, dates):
@@ -59,7 +55,7 @@ class Example4:
             price_list = []
             price_map[description] = price_list
             for date in dates:
-                price_list.append({date:self.random_price()})
+                price_list.append({date: self.random_price()})
         return price_map
 
     def random_price(self, min=50.00, max=499.99):
