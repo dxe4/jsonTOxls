@@ -9,6 +9,17 @@ class Example4:
     def __init__(self, locations):
         self.locations = locations
 
+    def create_data(self):
+        data = {}
+        for i in range(1, 10):
+            departure_location, arrival_location = \
+                data_structures.random_list_item(self.locations), data_structures.random_list_item(self.locations)
+            dates = self.random_days_dict()
+            companies = self.random_companies(dates)
+            data[i] = {"Departure": departure_location, "Arrival": arrival_location,
+                       "dates": dates, "companies": companies}
+        return data
+
     def random_days_dict(self):
         date_list = {}
         departure_list = []
@@ -28,28 +39,20 @@ class Example4:
             companies[company_key] = self.random_prices(dates)
         return companies
 
+
+    def random_prices(self, dates):
+        price_map = {}
+        for description, dates in dates.items():
+            for date in dates:
+                price_map[date] = self.random_price()
+        return price_map
+
     def random_price(self):
         if random.randrange(1, 4) > 1:
             return "%.2f" % random.uniform(50.00, 499.99)
         else:
             return None
 
-    def random_prices(self, dates):
-        price_map = {}
-        for k, v in dates.items():
-            for date in v:
-                price_map[date] = self.random_price()
-        return price_map
 
-    def create_data(self):
-        data = {}
-        for i in range(1, 10):
-            departure_location, arrival_location = \
-                data_structures.random_list_item(self.locations), data_structures.random_list_item(self.locations)
-            dates = self.random_days_dict()
-            companies = self.random_companies(dates)
-            data[i] = {"Departure": departure_location, "Arrival": arrival_location,
-                       "dates": dates, "companies": companies}
-        return data
 
 
