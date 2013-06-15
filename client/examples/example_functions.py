@@ -147,19 +147,20 @@ def example4_realistic():
 
     for k, v in data.items():
 
-        departure = v["Departure"]
-        arrival = v["Arrival"]
-        dates = v["dates"]
-        companies = v["companies"]
+        departure, arrival, dates, companies = v["Departure"], v["Arrival"], v["dates"], v["companies"]
+        to_string = lambda row, col: str(row) + "," + str(col)
+        header_lambda = lambda row, col, to_string: (
+            #returns ['0,0', '0,1', '1,0', '1,1'],['24,0', '24,1', '25,0', '25,1'] etc
+            [to_string(r, c) for r, c in
+             [(row, col), (row, col + 1), (row + 1, col), (row + 1, col + 1), (row + 2, col + 1)]]
+        )
+        header_data = header_lambda(row, col, to_string)
+        sheet[header_data[0]] = "Arrival"
+        sheet[header_data[1]] = arrival
+        sheet[header_data[2]] = "Departure"
+        sheet[header_data[3]] = departure
 
-        sheet[str(row) + "," + str(col)] = "Arrival"
-        row, col = row, col + 1
-        sheet[str(row) + "," + str(col)] = arrival
-        row, col = row + 1, col - 1
-        sheet[str(row) + "," + str(col)] = "Departure"
-        row, col = row, col + 1
-        sheet[str(row) + "," + str(col)] = departure
-        row, col = row + 1, col
+        row, col = (int(x) for x in header_data[4].split(","))
 
         column_iterator = ReportIterator(end=len(companies))
         row_iterator = ReportIterator(end=len(dates), child_iterator=column_iterator)
@@ -171,22 +172,21 @@ def example4_realistic():
         col = 0
         row += 1
         for k, v in dates.items():
-            sheet[str(row) + "," + str(col)] = k
+            sheet[to_string(row, col)] = k
             row += 1
             for date in v:
-                sheet[str(row) + "," + str(col)] = date.strftime('%m/%d/%Y')
+                sheet[to_string(row, col)] = date.strftime('%m/%d/%Y')
                 row += 1
         row += 1
 
     print(sheet)
 
-        # for row in report_iterator:
-        #     for col in report_iterator.child_iterator:
-        #         print("row " + str(row),"col " + str(col))
-    sheets.append({"sheet":sheet})
+    # for row in report_iterator:
+    #     for col in report_iterator.child_iterator:
+    #         print("row " + str(row),"col " + str(col))
+    sheets.append({"sheet": sheet})
     json_data["sheets"] = sheets
     return json_data
-
 
 
 example4_realistic()
@@ -195,4 +195,4 @@ functions = {"1": example1_hello_world(),
              "2": example2_formats_simple(),
              "3": example3_formats_more(),
              "4": example4_realistic()
-    }
+}
