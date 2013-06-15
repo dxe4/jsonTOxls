@@ -142,12 +142,10 @@ def example3_formats_more():
 
 def example4_realistic():
 
-    data = {}
     locations = read_file("locations")
     example4 = Example4(locations)
     data = example4.create_data()
     sheets=[]
-
     json_data={}
     sheet={}
     row = 0
