@@ -9,10 +9,14 @@ DONE:
 TODO:
 - Easy:
     - Add tutorials how to use
-    - Add realistic/more complicated examples
+    - Add merge cells
+    - Add conditional formatting
     - Create clients for other languages
     - Return xls file to the client, or url to the xls file (user can choose)
 
 - More Challenging:
     - Add charts
     - Add Worksheet Tables
+
+IN PROGRESS:
+    - Add realistic/more complicated examples & refactor/clean the examples code
