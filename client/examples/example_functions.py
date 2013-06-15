@@ -166,7 +166,7 @@ def example4_realistic():
         row_iterator = ReportIterator(end=len(dates), child_iterator=column_iterator)
 
         for k, v in companies.items():
-            sheet[str(row) + "," + str(col)] = k
+            sheet[to_string(row, col)] = k
             col += 1
 
         col = 0
