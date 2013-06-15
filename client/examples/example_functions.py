@@ -141,11 +141,10 @@ def example4_realistic():
     locations = read_file("locations")
     example4 = Example4(locations)
     data = example4.create_data()
-    sheets = []
-    json_data = {}
-    sheet = {}
-    row = 0
-    col = 0
+
+    sheets, sheet, json_data = [], {}, {}
+    row, col = 0, 0
+
     for k, v in data.items():
 
         departure = v["Departure"]
@@ -179,16 +178,21 @@ def example4_realistic():
                 row += 1
         row += 1
 
-        print(sheet)
+    print(sheet)
 
         # for row in report_iterator:
         #     for col in report_iterator.child_iterator:
         #         print("row " + str(row),"col " + str(col))
+    sheets.append({"sheet":sheet})
+    json_data["sheets"] = sheets
+    return json_data
 
-    return {"sheets": [{"sheet": sheet}]}
 
 
 example4_realistic()
 
-functions = {"1": example1_hello_world(), "2": example2_formats_simple(), "3": example3_formats_more(),
-             "4": example4_realistic()}
+functions = {"1": example1_hello_world(),
+             "2": example2_formats_simple(),
+             "3": example3_formats_more(),
+             "4": example4_realistic()
+    }
