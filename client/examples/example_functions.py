@@ -6,9 +6,9 @@ from multiprocessing.dummy import active_children
 import random
 import os.path
 import sys
-from random import randrange
-from datetime import timedelta, time
-from report_iterator import ReportIterator
+# from random import randrange
+# from datetime import timedelta, time
+# from report_iterator import ReportIterator
 from example_data import Example4
 
 
@@ -161,10 +161,8 @@ def example4_realistic():
         sheet[header_data[3]] = departure
 
         row, col = (int(x) for x in header_data[4].split(","))
-
-        column_iterator = ReportIterator(end=len(companies))
-        row_iterator = ReportIterator(end=len(dates), child_iterator=column_iterator)
-
+        # column_iterator = ReportIterator(end=len(companies))
+        # row_iterator = ReportIterator(end=len(dates), child_iterator=column_iterator)
         for k, v in companies.items():
             sheet[to_string(row, col)] = k
             col += 1
