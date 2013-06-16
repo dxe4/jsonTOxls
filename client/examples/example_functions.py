@@ -162,20 +162,19 @@ def example4_realistic():
 
         row = int(header_data[4].split(",")[0]) #(int(x) for x in header_data[4].split(","))
 
-        for count, k in enumerate(companies.keys()):
-            sheet[to_string(row, count + 1)] = k
+        for count, company_name in enumerate(companies.keys()):
+            sheet[to_string(row, count + 1)] = company_name
 
-        col = 0
-        row += 1
-        for k, v in dates.items():
-            sheet[to_string(row, col)] = k
-            row += 1
-            for date in v:
-                sheet[to_string(row, col)] = date.strftime('%m/%d/%Y')
-                row += 1
-        row += 1
-
-    print(sheet)
+        def add_dates(row):
+            for description_count, description in enumerate(dates.keys()):
+                description_row = description_count+row
+                sheet[to_string(description_row, 0)] = description
+                date_values = dates[description]
+                for date_count, date in enumerate(date_values):
+                    sheet[to_string(description_row+date_count+1, 0)] = date.strftime('%m/%d/%Y')
+                row += len(date_values)
+            return row+3
+        row = add_dates(row+1)
 
     # for row in report_iterator:
     #     for col in report_iterator.child_iterator:
