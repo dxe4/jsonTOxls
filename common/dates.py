@@ -13,7 +13,6 @@ def random_date(year=None, month=None, day=None):
     month = month if month else random.randrange(1, 12)
     day = day if day else random.randrange(1, 28)
     year = year if year else random.randrange(2013, 2014)
-    print(year, month, day)
     return datetime.date(year, month, day)
 
 #TODO fix random days
