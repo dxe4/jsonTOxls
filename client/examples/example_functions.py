@@ -9,7 +9,7 @@ import sys
 # from random import randrange
 # from datetime import timedelta, time
 # from report_iterator import ReportIterator
-from example_data import Example4
+from example_data import Example4Data
 
 
 def read_file(file_name):
@@ -139,7 +139,7 @@ def example3_formats_more():
 
 def example4_realistic():
     locations = read_file("locations")
-    example4 = Example4(locations)
+    example4 = Example4Data(locations)
     data = example4.create_data()
 
     sheets, sheet, json_data = [], {}, {}

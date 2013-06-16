@@ -5,7 +5,7 @@ import random
 from common import data_structures, dates
 
 
-class Example4:
+class Example4Data:
     def __init__(self, locations):
         self.locations = locations
 
