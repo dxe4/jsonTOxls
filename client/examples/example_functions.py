@@ -160,12 +160,10 @@ def example4_realistic():
         sheet[header_data[2]] = "Departure"
         sheet[header_data[3]] = departure
 
-        row, col = (int(x) for x in header_data[4].split(","))
-        # column_iterator = ReportIterator(end=len(companies))
-        # row_iterator = ReportIterator(end=len(dates), child_iterator=column_iterator)
-        for k, v in companies.items():
-            sheet[to_string(row, col)] = k
-            col += 1
+        row = int(header_data[4].split(",")[0]) #(int(x) for x in header_data[4].split(","))
+
+        for count, k in enumerate(companies.keys()):
+            sheet[to_string(row, count + 1)] = k
 
         col = 0
         row += 1
