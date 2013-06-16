@@ -173,7 +173,7 @@ def example4_realistic():
                 for date_count, date in enumerate(date_values):
                     sheet[to_string(description_row+date_count+1, 0)] = date.strftime('%m/%d/%Y')
                 row += len(date_values)
-            return row+3
+            return row+len(dates.keys())+1
         row = add_dates(row+1)
 
     # for row in report_iterator:
