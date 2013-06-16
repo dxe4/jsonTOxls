@@ -1,9 +1,10 @@
 import tornado.ioloop
 import tornado.web
 from tornado.escape import json_decode
-import traceback,sys
+import traceback, sys
 import xlsx_factory
 from input_factory import InputHandler
+
 
 class MainHandler(tornado.web.RequestHandler):
     def post(self):
@@ -17,6 +18,7 @@ class MainHandler(tornado.web.RequestHandler):
                 self.write("".join(traceback.format_exception(sys.exc_info()[0], sys.exc_info()[1], sys.exc_info()[2])))
         else:
             self.write("content_type should be set to application/json")
+
 
 application = tornado.web.Application([
     (r"/", MainHandler),

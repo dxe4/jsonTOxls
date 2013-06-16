@@ -2,10 +2,8 @@ import datetime
 
 
 class InputHandler(object):
-
-
     @staticmethod
-    def init_formats(input,workbook):
+    def init_formats(input, workbook):
         """
         Handles the cell formats if any. Json should have on the dictionary a formats key in order to create formats.
         If formats value doesnt exist return empty dict of formats, else add all formats in a dict.
@@ -18,13 +16,13 @@ class InputHandler(object):
         :return: Empty dict if no formats are set on JSON, dict format_name : format if formats are specified
         """
         return_dict = {}
-        for k,v in InputHandler.pop_dict(input,"formats").items():
+        for k, v in InputHandler.pop_dict(input, "formats").items():
             return_dict[k] = workbook.add_format(v)
         return return_dict
 
 
     @staticmethod
-    def get_args(value,formats):
+    def get_args(value, formats):
         """
         Get the cell arguements.
         :param value: The value can be set up as 3 different types at the moment, either 'A1' : 'Item' or
@@ -33,17 +31,20 @@ class InputHandler(object):
         :return: If only a value given the value is returned else the value of the cell is returned and a the specified
             format
         """
+
         def is_dict():
             key = "value" if "value" in value else "date"
             if "date" == key:
                 nums = [int(n) for n in value[key].split("-")]
                 date = datetime.date(nums[0], nums[1], nums[2])
-                return date,formats[value['format']]
+                return date, formats[value['format']]
             else:
-                return value['value'],formats[value['format']]
+                return value['value'], formats[value['format']]
+
         def is_str():
             return (value,)
-        functions = {dict:is_dict,str:is_str}
+
+        functions = {dict: is_dict, str: is_str}
         return functions[value.__class__]()
 
     def parse_cell_position(k):
@@ -58,7 +59,7 @@ class InputHandler(object):
 
 
     @staticmethod
-    def pop_dict(dictionary,key):
+    def pop_dict(dictionary, key):
         """
         'Safe' pop from dictionary, prevents from throwing an exception when the key doesnt exist and returns none instead
         :param dictionary: dictionary to pop from

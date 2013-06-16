@@ -29,7 +29,7 @@ class Example4:
         lambda_add = lambda list1, list2, arg1, arg2: (list1.append(arg1), list2.append(arg2))
         for i in range(1, 10):
             lambda_add(departure_list, arrival_list, *dates.random_dates_sorted(year=2013))
-        date_dict["Departure"],date_dict["Arrival"] = departure_list,arrival_list
+        date_dict["Departure"], date_dict["Arrival"] = departure_list, arrival_list
         return date_dict
 
     def random_companies(self, dates):
