@@ -15,7 +15,7 @@ ___
 To run
 
     python3 server/server.py
-    python3 client/client.py
+    python3 client/client.py  (change the example variable to run different example)
 
 Json and XLS examples in
 
