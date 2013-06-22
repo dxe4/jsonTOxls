@@ -31,3 +31,6 @@ Documentation
     I am planning for documentation in http://www.readthedocs.org but for now
     you can see the examples in client/examples/exmaple_functions.py and exmaple1-4.xls‎
 
+    For input documentation used to create files you can check xlsxwritter documentation at:
+    https://xlsxwriter.readthedocs.org/en/latest/
+
