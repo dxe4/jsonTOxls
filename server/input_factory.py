@@ -70,3 +70,20 @@ class InputHandler(object):
             return dictionary.pop(key)
         else:
             return {}
+
+    @staticmethod
+    def get_from_dict(dictionary,key):
+        if key in dictionary:
+            return dictionary[key]
+        else:
+            return None
+
+    @staticmethod
+    def safe_get_dict(dictionary,key,method):
+        functions = {
+                     "pop":
+                         lambda dictionary,key: dictionary[key] if key in dictionary else None,
+                     "get":
+                        lambda dictionary,key: dictionary.pop(key) if key in dictionary else {}
+                    }
+        return functions(method)(dictionary,key)
