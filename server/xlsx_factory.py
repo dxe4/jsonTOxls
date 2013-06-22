@@ -3,13 +3,14 @@ from collections import OrderedDict
 from input_factory import InputHandler
 from common import data_structures
 
+
 def create(input):
     """
     Creates the xls file.
     :param input: the json given after its decoded
     :return: return the file name of the file created.
     """
-    filename = data_structures.pop_dict(input,"filename")
+    filename = data_structures.pop_dict(input, "filename")
     workbook = Workbook(filename)
     formats = InputHandler.init_formats(input, workbook)
     for sheet in input['sheets']:

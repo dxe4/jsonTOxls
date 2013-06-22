@@ -59,24 +59,24 @@ class InputHandler(object):
             return (k,)
 
 
-    # @staticmethod
-    # def pop_dict(dictionary, key):
-    #     """
-    #     'Safe' pop from dictionary, prevents from throwing an exception when the key doesnt exist and returns none instead
-    #     :param dictionary: dictionary to pop from
-    #     :param key: key to find
-    #     :return: returns the value of the given key or None if it doesnt exist in the dict
-    #     """
-    #     if key in dictionary:
-    #         return dictionary.pop(key)
-    #     else:
-    #         return {}
-    #
-    # @staticmethod
-    # def get_from_dict(dictionary,key):
-    #     if key in dictionary:
-    #         return dictionary[key]
-    #     else:
-    #         return None
+            # @staticmethod
+            # def pop_dict(dictionary, key):
+            #     """
+            #     'Safe' pop from dictionary, prevents from throwing an exception when the key doesnt exist and returns none instead
+            #     :param dictionary: dictionary to pop from
+            #     :param key: key to find
+            #     :return: returns the value of the given key or None if it doesnt exist in the dict
+            #     """
+            #     if key in dictionary:
+            #         return dictionary.pop(key)
+            #     else:
+            #         return {}
+            #
+            # @staticmethod
+            # def get_from_dict(dictionary,key):
+            #     if key in dictionary:
+            #         return dictionary[key]
+            #     else:
+            #         return None
 
 
