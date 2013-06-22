@@ -3,6 +3,7 @@ from datetime import timedelta, time
 import datetime
 import random
 from common import data_structures, dates
+from server import input_factory
 
 
 class Example4Data:

@@ -10,6 +10,7 @@ import sys
 # from datetime import timedelta, time
 # from report_iterator import ReportIterator
 from example_data import Example4Data
+from server.input_factory import InputHandler
 
 
 def read_file(file_name):
@@ -165,16 +166,28 @@ def example4_realistic():
         for count, company_name in enumerate(companies.keys()):
             sheet[to_string(row, count + 1)] = company_name
 
+        def add_prices(row, date_to_match, description):
+            col = 1;
+            for company, dates in companies.items():
+                for date_in_company in dates[description]:
+                    date_found = InputHandler.get_from_dict(date_in_company, date_to_match)
+                    if date_found:
+                        sheet[to_string(row, col)] = date_found
+                col += 1
+
         def add_dates(row):
             for description_count, description in enumerate(dates.keys()):
-                description_row = description_count+row
+                description_row = description_count + row
                 sheet[to_string(description_row, 0)] = description
                 date_values = dates[description]
                 for date_count, date in enumerate(date_values):
-                    sheet[to_string(description_row+date_count+1, 0)] = date.strftime('%m/%d/%Y')
+                    date_row = description_row + date_count + 1
+                    sheet[to_string(date_row, 0)] = date.strftime('%m/%d/%Y')
+                    add_prices(date_row, date, description)
                 row += len(date_values)
-            return row+len(dates.keys())+1
-        row = add_dates(row+1)
+            return row + len(dates.keys()) + 1
+
+        row = add_dates(row + 1)
 
     # for row in report_iterator:
     #     for col in report_iterator.child_iterator:
