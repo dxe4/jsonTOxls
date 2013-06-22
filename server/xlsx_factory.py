@@ -27,10 +27,10 @@ def process_sheet(workbook, sheet, formats):
     :param formats: Dictionary of string:cell_format as processed by input factory.
     """
 
-    for k, v in sheet.items():
+    for sheet_name, sheet_data in sheet.items():
         sorted_dict = OrderedDict(
-            sorted(v.items(), key=lambda t: t[0]))#sort may be important when adding formulas,rely on correct input
-        worksheet = workbook.add_worksheet(k)
+            sorted(sheet_data.items(), key=lambda t: t[0]))#sort may be important when adding formulas,rely on correct input
+        worksheet = workbook.add_worksheet(sheet_name)
         add_cells(worksheet, sorted_dict, formats)
 
 
@@ -44,9 +44,9 @@ def add_cells(sheet, sorted_dict, formats):
     conditional_formats = data_structures.pop_dict(sorted_dict, "conditional_formats")
     column_sizes = data_structures.pop_dict(sorted_dict, "column_size")
 
-    for k, v in sorted_dict.items():
-        new_value = InputHandler.get_args(v, formats)
-        new_key = InputHandler.parse_cell_position(k)
+    for cell_pos, cell_value in sorted_dict.items():
+        new_value = InputHandler.get_args(cell_value, formats)
+        new_key = InputHandler.parse_cell_position(cell_pos)
         args = new_key + new_value
         sheet.write(*args)#'B2':'1000.10'
 
@@ -61,9 +61,9 @@ def add_conditional_formats(conditional_formats, formats, worksheet):
     :param formats: The map of formats as given by json.
     :param worksheet: The current worksheet.
     """
-    for k, v in conditional_formats.items():
-        v["format"] = formats.get(v.get("format"))#replace format value with actual format - see json.
-        worksheet.conditional_format(k, v)
+    for cells, criteria in conditional_formats.items():
+        criteria["format"] = formats.get(criteria.get("format"))#replace format value with actual format - see json.
+        worksheet.conditional_format(cells, criteria)
 
 
 def resize_columns(column_sizes, worksheet):
