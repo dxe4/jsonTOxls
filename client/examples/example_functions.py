@@ -11,7 +11,7 @@ import sys
 # from report_iterator import ReportIterator
 from example_data import Example4Data
 from server.input_factory import InputHandler
-
+from common import data_structures
 
 def read_file(file_name):
     file_path = os.path.join(os.path.dirname(__file__), file_name)
@@ -170,7 +170,8 @@ def example4_realistic():
             col = 1;
             for company, dates in companies.items():
                 for date_in_company in dates[description]:
-                    date_found = InputHandler.get_from_dict(date_in_company, date_to_match)
+                    date_found = data_structures.get_dict(date_in_company, date_to_match)
+                    #date_found = InputHandler.get_from_dict(date_in_company, date_to_match)
                     if date_found:
                         sheet[to_string(row, col)] = date_found
                 col += 1

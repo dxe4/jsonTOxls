@@ -1,7 +1,7 @@
 from xlsxwriter.workbook import Workbook
 from collections import OrderedDict
 from input_factory import InputHandler
-
+from common import data_structures
 
 def create(input):
     """
@@ -9,7 +9,7 @@ def create(input):
     :param input: the json given after its decoded
     :return: return the file name of the file created.
     """
-    filename = InputHandler.pop_dict(input, "filename")
+    filename = data_structures.pop_dict(input,"filename")
     workbook = Workbook(filename)
     formats = InputHandler.init_formats(input, workbook)
     for sheet in input['sheets']:
@@ -40,8 +40,8 @@ def add_cells(sheet, sorted_dict, formats):
     :param sorted_dict: The cell values as given by user.
     :param formats: Dictionary of string:cell_format as processed by input factory.
     """
-    conditional_formats = InputHandler.pop_dict(sorted_dict, "conditional_formats")
-    column_sizes = InputHandler.pop_dict(sorted_dict, "column_size")
+    conditional_formats = data_structures.pop_dict(sorted_dict, "conditional_formats")
+    column_sizes = data_structures.pop_dict(sorted_dict, "column_size")
 
     for k, v in sorted_dict.items():
         new_value = InputHandler.get_args(v, formats)

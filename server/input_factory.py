@@ -1,4 +1,5 @@
 import datetime
+from common import data_structures
 
 
 class InputHandler(object):
@@ -16,7 +17,7 @@ class InputHandler(object):
         :return: Empty dict if no formats are set on JSON, dict format_name : format if formats are specified
         """
         return_dict = {}
-        for k, v in InputHandler.pop_dict(input, "formats").items():
+        for k, v in data_structures.pop_dict(input, "formats").items():
             return_dict[k] = workbook.add_format(v)
         return return_dict
 
@@ -58,32 +59,24 @@ class InputHandler(object):
             return (k,)
 
 
-    @staticmethod
-    def pop_dict(dictionary, key):
-        """
-        'Safe' pop from dictionary, prevents from throwing an exception when the key doesnt exist and returns none instead
-        :param dictionary: dictionary to pop from
-        :param key: key to find
-        :return: returns the value of the given key or None if it doesnt exist in the dict
-        """
-        if key in dictionary:
-            return dictionary.pop(key)
-        else:
-            return {}
+    # @staticmethod
+    # def pop_dict(dictionary, key):
+    #     """
+    #     'Safe' pop from dictionary, prevents from throwing an exception when the key doesnt exist and returns none instead
+    #     :param dictionary: dictionary to pop from
+    #     :param key: key to find
+    #     :return: returns the value of the given key or None if it doesnt exist in the dict
+    #     """
+    #     if key in dictionary:
+    #         return dictionary.pop(key)
+    #     else:
+    #         return {}
+    #
+    # @staticmethod
+    # def get_from_dict(dictionary,key):
+    #     if key in dictionary:
+    #         return dictionary[key]
+    #     else:
+    #         return None
 
-    @staticmethod
-    def get_from_dict(dictionary,key):
-        if key in dictionary:
-            return dictionary[key]
-        else:
-            return None
 
-    @staticmethod
-    def safe_get_dict(dictionary,key,method):
-        functions = {
-                     "pop":
-                         lambda dictionary,key: dictionary[key] if key in dictionary else None,
-                     "get":
-                        lambda dictionary,key: dictionary.pop(key) if key in dictionary else {}
-                    }
-        return functions(method)(dictionary,key)

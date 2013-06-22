@@ -9,3 +9,16 @@ def random_list_item(list):
     """
     index = random.randrange(0, list.__len__())
     return list[index]
+
+
+get_dict = lambda dictionary, key: dictionary[key] if key in dictionary else None;
+pop_dict = lambda dictionary, key: dictionary.pop(key) if key in dictionary else {};
+
+
+def safe_get_dict(dictionary, key, method):
+    functions = {
+        "pop": get_dict,
+        "get": pop_dict
+    }
+    f = functions[method]
+    return f(dictionary, key)
