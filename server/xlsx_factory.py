@@ -29,7 +29,8 @@ def process_sheet(workbook, sheet, formats):
 
     for sheet_name, sheet_data in sheet.items():
         sorted_dict = OrderedDict(
-            sorted(sheet_data.items(), key=lambda t: t[0]))#sort may be important when adding formulas,rely on correct input
+            sorted(sheet_data.items(), key=lambda t: t[0])
+        )#sort may be important when adding formulas,rely on correct input
         worksheet = workbook.add_worksheet(sheet_name)
         add_cells(worksheet, sorted_dict, formats)
 
@@ -48,10 +49,14 @@ def add_cells(sheet, sorted_dict, formats):
         new_value = InputHandler.get_args(cell_value, formats)
         new_key = InputHandler.parse_cell_position(cell_pos)
         args = new_key + new_value
-        sheet.write(*args)#'B2':'1000.10'
+        if isinstance(args[0],str) and ":" in args[0]:
+            sheet.merge_range(*args)
+        else:
+            sheet.write(*args)#'B2':'1000.10'
 
     add_conditional_formats(conditional_formats, formats, sheet)
     resize_columns(column_sizes, sheet)
+    #    sheet.merge_range('D1:F1',"dsa")
 
 
 def add_conditional_formats(conditional_formats, formats, worksheet):
