@@ -153,7 +153,7 @@ class Example4:
 
     def init_xls_writer_values(self):
         self.xlsx_data = {
-            'date_format':{'num_format': 'yyyy d mmmm'},
+            'date_format':{'num_format': 'mmm d yyyy'},
             'number': {'num_format': '$#,##.##'}
         }
 
@@ -210,7 +210,7 @@ class Example4:
 
     def add_dates(self, sheet, companies, description_row, description, date_count, date):
         date_row = description_row + date_count + 1
-        sheet[self.to_string(date_row, 0)] = date.strftime('%m/%d/%Y')
+        sheet[self.to_string(date_row, 0)] = {'date': date.strftime('%Y-%m-%d'), 'format': 'date_format'}
         self.add_prices(sheet, companies, date_row, date, description)
 
     def example4_realistic(self):
