@@ -8,6 +8,7 @@ client/examples/example_functions.py
 common/__init__.py
 common/data_structures.py
 common/dates.py
+common/excel.py
 server/__init__.py
 server/input_factory.py
 server/server.py
