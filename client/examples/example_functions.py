@@ -141,15 +141,20 @@ def example3_formats_more():
     return sheet
 
 class Example4:
+
+    def __init__(self):
+        self.locations = read_file("locations")
+        self.example4Data = Example4Data(self.locations)
+        self.data = self.example4Data.create_data()
+        self.sheets = []
+        self.json_data = {}
+
+
+
     def example4_realistic(self):
-        locations = read_file("locations")
-        example4 = Example4Data(locations)
-        data = example4.create_data()
-
-        sheets, sheet, json_data = [], {}, {}
         row, col = 0, 0
-
-        for k, v in data.items():
+        sheet = {}
+        for k, v in self.data.items():
 
             departure, arrival, dates, companies = v["Departure"], v["Arrival"], v["dates"], v["companies"]
             to_string = lambda row, col: str(row) + "," + str(col)
@@ -192,13 +197,14 @@ class Example4:
 
             row = add_dates(row + 1)
 
-        sheets.append({"sheet": sheet})
-        json_data["sheets"] = sheets
-        return json_data
+        self.sheets.append({"sheet": sheet})
+        self.json_data["sheets"] = self.sheets
+        print(self.json_data)
+        return self.json_data
 
 
 example4 = Example4()
-example4.example4_realistic()
+#example4.example4_realistic()
 
 functions = {"1": example1_hello_world(),
              "2": example2_formats_simple(),
