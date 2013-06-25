@@ -231,7 +231,6 @@ class Example4:
             date_values = dates[description]
             for date_count, date in enumerate(date_values):
                 self.add_dates(sheet, companies, description_row, description, date_count, date)
-            row += len(date_values)
         return row + len(dates.keys()) + 1
 
     def add_dates(self, sheet, companies, description_row, description, date_count, date):
@@ -245,6 +244,15 @@ class Example4:
             'type': 'cell', 'criteria': 'between', 'minimum': 1, 'maximum': min + 10, 'format': 'cond_format'
         }
 
+    def post_create(self,sheet):
+        sheet["column_size"] = self.column_size
+        sheet["conditional_formats"] = self.conditional_formats
+        self.sheets.append({"sheet": sheet})
+        self.json_data["sheets"] = self.sheets
+        self.json_data["formats"] = self.formats
+        pp = pprint.PrettyPrinter(indent=4)
+        pp.pprint(self.json_data)
+
     def create(self):
         row, col = 0, 0
         sheet = OrderedDict()
@@ -255,13 +263,7 @@ class Example4:
             row = self.add_companies(sheet, companies, row)
             row = self.add_data(sheet, dates, companies, row)
 
-        sheet["column_size"] = self.column_size
-        sheet["conditional_formats"] = self.conditional_formats
-        self.sheets.append({"sheet": sheet})
-        self.json_data["sheets"] = self.sheets
-        self.json_data["formats"] = self.formats
-        pp = pprint.PrettyPrinter(indent=4)
-        pp.pprint(self.json_data)
+        self.post_create(sheet)
         return self.json_data
 
 
