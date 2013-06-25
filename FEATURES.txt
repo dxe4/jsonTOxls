@@ -7,6 +7,7 @@ DONE:
 - Resize columns
 - Add merge cells
 - Add conditional formatting
+- Add realistic/more complicated examples & refactor/clean the examples code
 
 TODO:
 - Easy:
@@ -19,4 +20,3 @@ TODO:
     - Add Worksheet Tables
 
 IN PROGRESS:
-    - Add realistic/more complicated examples & refactor/clean the examples code
