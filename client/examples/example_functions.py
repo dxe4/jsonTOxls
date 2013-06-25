@@ -196,6 +196,7 @@ class Example4:
         """
         for count, company_name in enumerate(companies.keys()):
             sheet[self.to_string(row, count + 1)] = company_name
+        return row+1
 
     def add_prices(self, sheet, companies, row, date_to_match, description):
         col = 1;
@@ -228,8 +229,8 @@ class Example4:
         for k, v in self.data.items():
             departure, arrival, dates, companies = v["Departure"], v["Arrival"], v["dates"], v["companies"]
             row = self.add_headers(sheet, row, col, arrival, departure)
-            self.add_companies(sheet, companies, row)
-            row = self.add_data(sheet, dates, companies, row + 1)
+            row= self.add_companies(sheet, companies, row)
+            row = self.add_data(sheet, dates, companies, row )
         self.sheets.append({"sheet": sheet})
         self.json_data["sheets"] = self.sheets
         self.json_data["formats"] = self.xlsx_data
