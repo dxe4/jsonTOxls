@@ -153,13 +153,16 @@ class Example4:
         self.init_xls_writer_values()
 
     def init_xls_writer_values(self):
-        self.xlsx_data = {
+        self.formats = {
             'date_format': {'num_format': 'mmm d yyyy'},
             'number': {'num_format': '$#,##.##'},
             'header_description': {'bold': True, 'font_color': '#333300', 'bg_color': '#E0E0E0', 'font_size': 14},
             'header_arrival': {'bold': True, 'font_color': '#CC3300', 'bg_color': '#E0E0E0', 'font_size': 14},
             'header_departure': {'bold': True, 'font_color': '#CC0000', 'bg_color': '#E0E0E0', 'font_size': 14}
         }
+        self.column_size = {
+                'A:H': 12
+            }
 
     def init_lambda(self):
         self.to_string = lambda row, col: str(row) + "," + str(col)
@@ -234,9 +237,11 @@ class Example4:
             row = self.add_headers(sheet, row, col, arrival, departure)
             row = self.add_companies(sheet, companies, row)
             row = self.add_data(sheet, dates, companies, row)
+        sheet["column_size"] = self.column_size
         self.sheets.append({"sheet": sheet})
         self.json_data["sheets"] = self.sheets
-        self.json_data["formats"] = self.xlsx_data
+        self.json_data["formats"] = self.formats
+
         print(self.json_data)
         return self.json_data
 
