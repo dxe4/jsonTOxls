@@ -161,7 +161,7 @@ class Example4:
             'header_departure': {'bold': True, 'font_color': '#CC0000', 'bg_color': '#E0E0E0', 'font_size': 14},
             'date_description': {'bg_color': '#CCFFFF', 'font_size': 12},
             'company': {'bg_color': '#CCFFFF', 'font_size': 12},
-            'number_bold_blue': {'bold': True, 'font_color': 'red', 'bg_color': '#99CCFF', 'num_format': '$#,##.##'}
+            'cond_format': { 'bg_color': '#FFFFCC', 'num_format': '$#,##.##'}
             #CCFFFF
         }
         self.column_size = {
@@ -240,7 +240,7 @@ class Example4:
     def add_conditional_format(self, start_row, end_row, start_col, end_col, min):
         cols = excel_common.number_to_cells([start_col, end_col - 1])
         self.conditional_formats[cols[0] + str(start_row + 1) + ":" + cols[1] + str(end_row + 1)] = {
-            'type': 'cell', 'criteria': 'between', 'minimum': 1, 'maximum': min + 10, 'format': 'number_bold_blue'
+            'type': 'cell', 'criteria': 'between', 'minimum': 1, 'maximum': min + 10, 'format': 'cond_format'
         }
 
     def example4_realistic(self):
