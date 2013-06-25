@@ -167,24 +167,26 @@ class Example4:
         row = int(header_data[4].split(",")[0]) #(int(x) for x in header_data[4].split(","))
         return row
 
+    def add_companies(self,sheet,companies,row):
+        for count, company_name in enumerate(companies.keys()):
+            sheet[self.to_string(row, count + 1)] = company_name
+
+    def add_prices(self,sheet,companies,row, date_to_match, description):
+        col = 1;
+        for company, dates in companies.items():
+            for date_in_company in dates[description]:
+                date_found = data_structures.get_dict(date_in_company, date_to_match)
+                if date_found:
+                    sheet[ self.to_string(row, col)] = date_found
+            col += 1
+
     def example4_realistic(self):
         row, col = 0, 0
         sheet = {}
         for k, v in self.data.items():
             departure, arrival, dates, companies = v["Departure"], v["Arrival"], v["dates"], v["companies"]
             row = self.add_headers(sheet,row,col,arrival,departure)
-
-            for count, company_name in enumerate(companies.keys()):
-                sheet[self.to_string(row, count + 1)] = company_name
-
-            def add_prices(row, date_to_match, description):
-                col = 1;
-                for company, dates in companies.items():
-                    for date_in_company in dates[description]:
-                        date_found = data_structures.get_dict(date_in_company, date_to_match)
-                        if date_found:
-                            sheet[ self.to_string(row, col)] = date_found
-                    col += 1
+            self.add_companies(sheet,companies,row)
 
             def add_dates(row):
                 for description_count, description in enumerate(dates.keys()):
@@ -194,7 +196,7 @@ class Example4:
                     for date_count, date in enumerate(date_values):
                         date_row = description_row + date_count + 1
                         sheet[ self.to_string(date_row, 0)] = date.strftime('%m/%d/%Y')
-                        add_prices(date_row, date, description)
+                        self.add_prices(sheet,companies,date_row, date, description)
                     row += len(date_values)
                 return row + len(dates.keys()) + 1
 
