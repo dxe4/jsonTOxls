@@ -34,6 +34,6 @@ Documentation
     For input documentation used to create files you can check xlsxwritter documentation at:
     https://xlsxwriter.readthedocs.org/en/latest/
 
-    Note: See client/exmaples/example4.xlsx and client/examples/example4.json for a realistic example,
+    Note: See client/exmaples/example4.xls and client/examples/example4.json for a realistic example,
     It contains lot of data, conditional formatting, fonts, colors, mergin etc
 
