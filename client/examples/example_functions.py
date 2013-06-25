@@ -155,7 +155,10 @@ class Example4:
     def init_xls_writer_values(self):
         self.xlsx_data = {
             'date_format': {'num_format': 'mmm d yyyy'},
-            'number': {'num_format': '$#,##.##'}
+            'number': {'num_format': '$#,##.##'},
+            'header_description': {'bold': True, 'font_color': '#333300', 'bg_color': '#E0E0E0', 'font_size': 14},
+            'header_arrival': {'bold': True, 'font_color': '#CC3300', 'bg_color': '#E0E0E0', 'font_size': 14},
+            'header_departure': {'bold': True, 'font_color': '#CC0000', 'bg_color': '#E0E0E0', 'font_size': 14}
         }
 
     def init_lambda(self):
@@ -180,13 +183,13 @@ class Example4:
             nums = [int(n) for n in cell_str.split(",")]
             col = nums[1]
             row = nums[0]
-            columns = excel_common.number_to_cells([col, col + 1])
+            columns = excel_common.number_to_cells([col, col + 3])
             return columns[0] + str(row + 1) + ":" + columns[1] + str(row + 1)
 
-        sheet[header_data[0]] = "Arrival"
-        sheet[merge(header_data[1])] = arrival
-        sheet[header_data[2]] = "Departure"
-        sheet[merge(header_data[3])] = departure
+        sheet[header_data[0]] = {"value": "Arrival", "format": "header_description"}
+        sheet[merge(header_data[1])] = {"value": arrival, "format": "header_arrival"}
+        sheet[header_data[2]] = {"value": 'Departure', "format": "header_description"}
+        sheet[merge(header_data[3])] = {"value": departure, "format": "header_departure"}
         row = int(header_data[4].split(",")[0]) #(int(x) for x in header_data[4].split(","))
         return row
 
@@ -196,7 +199,7 @@ class Example4:
         """
         for count, company_name in enumerate(companies.keys()):
             sheet[self.to_string(row, count + 1)] = company_name
-        return row+1
+        return row + 1
 
     def add_prices(self, sheet, companies, row, date_to_match, description):
         col = 1;
@@ -229,8 +232,8 @@ class Example4:
         for k, v in self.data.items():
             departure, arrival, dates, companies = v["Departure"], v["Arrival"], v["dates"], v["companies"]
             row = self.add_headers(sheet, row, col, arrival, departure)
-            row= self.add_companies(sheet, companies, row)
-            row = self.add_data(sheet, dates, companies, row )
+            row = self.add_companies(sheet, companies, row)
+            row = self.add_data(sheet, dates, companies, row)
         self.sheets.append({"sheet": sheet})
         self.json_data["sheets"] = self.sheets
         self.json_data["formats"] = self.xlsx_data
