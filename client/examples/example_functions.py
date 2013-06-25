@@ -243,7 +243,7 @@ class Example4:
             'type': 'cell', 'criteria': 'between', 'minimum': 1, 'maximum': min + 10, 'format': 'cond_format'
         }
 
-    def example4_realistic(self):
+    def create(self):
         row, col = 0, 0
         sheet = {}
 
@@ -264,7 +264,7 @@ class Example4:
 
 
 def example4_realistic():
-    return Example4().example4_realistic()
+    return Example4().create()
 
 
 functions = {"1": example1_hello_world(),
