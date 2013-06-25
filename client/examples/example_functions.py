@@ -13,6 +13,7 @@ from example_data import Example4Data
 from server.input_factory import InputHandler
 from common import data_structures
 
+
 def read_file(file_name):
     file_path = os.path.join(os.path.dirname(__file__), file_name)
     file = open(file_path, "r")
@@ -106,6 +107,8 @@ def example3_formats_more():
         '3,2': {'date': '2013-03-01', 'format': 'date_format2'},
         '4,2': {'date': '2013-04-01', 'format': 'date_format2'},
         #
+
+
         "conditional_formats": {
             'B2:B5': {
                 'type': 'cell', 'criteria': '>=', 'value': 300, 'format': 'number_bold_blue'
@@ -171,7 +174,6 @@ def example4_realistic():
             for company, dates in companies.items():
                 for date_in_company in dates[description]:
                     date_found = data_structures.get_dict(date_in_company, date_to_match)
-                    #date_found = InputHandler.get_from_dict(date_in_company, date_to_match)
                     if date_found:
                         sheet[to_string(row, col)] = date_found
                 col += 1
@@ -190,9 +192,6 @@ def example4_realistic():
 
         row = add_dates(row + 1)
 
-    # for row in report_iterator:
-    #     for col in report_iterator.child_iterator:
-    #         print("row " + str(row),"col " + str(col))
     sheets.append({"sheet": sheet})
     json_data["sheets"] = sheets
     return json_data

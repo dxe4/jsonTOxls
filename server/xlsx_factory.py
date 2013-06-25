@@ -49,7 +49,7 @@ def add_cells(sheet, sorted_dict, formats):
         new_value = InputHandler.get_args(cell_value, formats)
         new_key = InputHandler.parse_cell_position(cell_pos)
         args = new_key + new_value
-        if isinstance(args[0],str) and ":" in args[0]:
+        if isinstance(args[0], str) and ":" in args[0]:
             sheet.merge_range(*args)
         else:
             sheet.write(*args)#'B2':'1000.10'
