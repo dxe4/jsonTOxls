@@ -149,6 +149,13 @@ class Example4:
         self.sheets = []
         self.json_data = {}
         self.init_lambda()
+        self.init_xls_writer_values()
+
+    def init_xls_writer_values(self):
+        self.xlsx_data = {
+            'date_format':{'num_format': 'yyyy d mmmm'},
+            'number': {'num_format': '$#,##.##'}
+        }
 
     def init_lambda(self):
         self.to_string = lambda row, col: str(row) + "," + str(col)
@@ -159,6 +166,13 @@ class Example4:
         )
 
     def add_headers(self, sheet, row, col, arrival, departure):
+
+        """
+            Add headers e.g.
+                Arrival	'Teesside Airport'
+                Departure	'Sandefjord Airport'
+        :return: current row
+        """
         header_data = self.header_lambda(row, col, self.to_string)
         sheet[header_data[0]] = "Arrival"
         sheet[header_data[1]] = arrival
@@ -168,6 +182,9 @@ class Example4:
         return row
 
     def add_companies(self, sheet, companies, row):
+        """
+            Add companies e.g. company 4	company 8	company 2
+        """
         for count, company_name in enumerate(companies.keys()):
             sheet[self.to_string(row, count + 1)] = company_name
 
@@ -175,9 +192,10 @@ class Example4:
         col = 1;
         for company, dates in companies.items():
             for date_in_company in dates[description]:
-                date_found = data_structures.get_dict(date_in_company, date_to_match)
-                if date_found:
-                    sheet[self.to_string(row, col)] = date_found
+                price_for_date = data_structures.get_dict(date_in_company, date_to_match)
+                if not price_for_date:
+                    continue
+                sheet[self.to_string(row, col)] = {"value":price_for_date,"format":"number"}
             col += 1
 
     def add_data(self, sheet, dates, companies, row):
@@ -205,11 +223,10 @@ class Example4:
             row = self.add_data(sheet, dates, companies, row + 1)
         self.sheets.append({"sheet": sheet})
         self.json_data["sheets"] = self.sheets
+        self.json_data["formats"] = self.xlsx_data
         print(self.json_data)
         return self.json_data
 
-
-#example4.example4_realistic()
 
 def example4_realistic():
     return Example4().example4_realistic()
