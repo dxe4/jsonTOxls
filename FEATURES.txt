@@ -5,13 +5,13 @@ DONE:
 - Add Cell formats (colors,fonts,dates,bold etc)
 - Add conditional formatting (highlight all cells in column A that have value < 50
 - Resize columns
+- Add merge cells
+- Add conditional formatting
 
 TODO:
 - Easy:
     - Add tutorials how to use
-    - Add merge cells
-    - Add conditional formatting
-    - Create clients for other languages
+    - Create clients for other programming languages
     - Return xls file to the client, or url to the xls file (user can choose)
 
 - More Challenging:
