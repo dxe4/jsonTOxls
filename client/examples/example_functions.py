@@ -12,6 +12,7 @@ import sys
 from example_data import Example4Data
 from server.input_factory import InputHandler
 from common import data_structures
+from common import excel as excel_common
 
 
 def read_file(file_name):
@@ -174,10 +175,18 @@ class Example4:
         :return: current row
         """
         header_data = self.header_lambda(row, col, self.to_string)
+
+        def merge(cell_str):
+            nums = [int(n) for n in cell_str.split(",")]
+            col = nums[1]
+            row = nums[0]
+            columns = excel_common.number_to_cells([col,col+1])
+            return columns[0] + str(row+1) + ":" + columns[1] + str(row+1)
+
         sheet[header_data[0]] = "Arrival"
-        sheet[header_data[1]] = arrival
+        sheet[merge(header_data[1])] = arrival
         sheet[header_data[2]] = "Departure"
-        sheet[header_data[3]] = departure
+        sheet[merge(header_data[3])] = departure
         row = int(header_data[4].split(",")[0]) #(int(x) for x in header_data[4].split(","))
         return row
 
