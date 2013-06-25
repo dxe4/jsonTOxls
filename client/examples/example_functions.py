@@ -154,18 +154,20 @@ class Example4:
 
     def init_xls_writer_values(self):
         self.formats = {
-            'date_format': {'num_format': 'mmm d yyyy','font_size': 11},
+            'date_format': {'num_format': 'mmm d yyyy', 'font_size': 11},
             'number': {'num_format': '$#,##.##'},
             'header_description': {'bold': True, 'font_color': '#333300', 'bg_color': '#E0E0E0', 'font_size': 14},
             'header_arrival': {'bold': True, 'font_color': '#CC3300', 'bg_color': '#E0E0E0', 'font_size': 14},
             'header_departure': {'bold': True, 'font_color': '#CC0000', 'bg_color': '#E0E0E0', 'font_size': 14},
-            'date_description': {  'bg_color': '#CCFFFF', 'font_size': 12},
-            'company': {  'bg_color': '#CCFFFF', 'font_size': 12}
+            'date_description': {'bg_color': '#CCFFFF', 'font_size': 12},
+            'company': {'bg_color': '#CCFFFF', 'font_size': 12},
+            'number_bold_blue': {'bold': True, 'font_color': 'red', 'bg_color': '#99CCFF', 'num_format': '$#,##.##'}
             #CCFFFF
         }
         self.column_size = {
-                'A:H': 12
-            }
+            'A:H': 12
+        }
+        self.conditional_formats = {}
 
     def init_lambda(self):
         self.to_string = lambda row, col: str(row) + "," + str(col)
@@ -204,23 +206,26 @@ class Example4:
             Add companies e.g. company 4	company 8	company 2
         """
         for count, company_name in enumerate(companies.keys()):
-            sheet[self.to_string(row, count + 1)] = {"value":company_name,"format":"company"}
+            sheet[self.to_string(row, count + 1)] = {"value": company_name, "format": "company"}
         return row + 1
 
     def add_prices(self, sheet, companies, row, date_to_match, description):
-        col = 1;
+        col = 1
+        min = -1
         for company, dates in companies.items():
             for date_in_company in dates[description]:
                 price_for_date = data_structures.get_dict(date_in_company, date_to_match)
                 if not price_for_date:
                     continue
+                min = int(float(price_for_date)) if int(float(price_for_date)) < min or min == -1 else min
                 sheet[self.to_string(row, col)] = {"value": price_for_date, "format": "number"}
             col += 1
+        self.add_conditional_format(row, row, 1, col, min)
 
     def add_data(self, sheet, dates, companies, row):
         for description_count, description in enumerate(dates.keys()):
             description_row = description_count + row
-            sheet[self.to_string(description_row, 0)] = {"value":description,"format":"date_description"}
+            sheet[self.to_string(description_row, 0)] = {"value": description, "format": "date_description"}
             date_values = dates[description]
             for date_count, date in enumerate(date_values):
                 self.add_dates(sheet, companies, description_row, description, date_count, date)
@@ -232,15 +237,24 @@ class Example4:
         sheet[self.to_string(date_row, 0)] = {'date': date.strftime('%Y-%m-%d'), 'format': 'date_format'}
         self.add_prices(sheet, companies, date_row, date, description)
 
+    def add_conditional_format(self, start_row, end_row, start_col, end_col, min):
+        cols = excel_common.number_to_cells([start_col, end_col - 1])
+        self.conditional_formats[cols[0] + str(start_row + 1) + ":" + cols[1] + str(end_row + 1)] = {
+            'type': 'cell', 'criteria': 'between', 'minimum': 1, 'maximum': min + 10, 'format': 'number_bold_blue'
+        }
+
     def example4_realistic(self):
         row, col = 0, 0
         sheet = {}
+
         for k, v in self.data.items():
             departure, arrival, dates, companies = v["Departure"], v["Arrival"], v["dates"], v["companies"]
             row = self.add_headers(sheet, row, col, arrival, departure)
             row = self.add_companies(sheet, companies, row)
             row = self.add_data(sheet, dates, companies, row)
+
         sheet["column_size"] = self.column_size
+        sheet["conditional_formats"] = self.conditional_formats
         self.sheets.append({"sheet": sheet})
         self.json_data["sheets"] = self.sheets
         self.json_data["formats"] = self.formats
