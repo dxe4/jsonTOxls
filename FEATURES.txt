@@ -14,6 +14,8 @@ TODO:
     - Add tutorials how to use
     - Create clients for other programming languages
     - Return xls file to the client, or url to the xls file (user can choose)
+    - Add Support for multiple cells to apply on a format to reduce server traffic. e.g rows 1-10 column 2 add specific format.
+        Instead of sending redundant data.
 
 - More Challenging:
     - Add charts
