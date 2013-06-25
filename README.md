@@ -6,7 +6,7 @@ Create Excel files using json requests. A tornado server (http://www.tornadoweb.
 Both client and server build in python but the client can be written in any language.
 
 ___
-It works as basic functionality (add values, sheets, formats, conditional formatting)
+It works as basic functionality (add values, sheets, formats, conditional formatting, merging)
 ___
 Requires
 ------------
