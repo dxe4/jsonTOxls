@@ -1,5 +1,5 @@
 import os.path, sys
-
+import pprint
 sys.path.append(os.path.dirname(__file__))
 import datetime
 from multiprocessing.dummy import active_children
@@ -13,6 +13,8 @@ from example_data import Example4Data
 from server.input_factory import InputHandler
 from common import data_structures
 from common import excel as excel_common
+from collections import OrderedDict
+
 
 
 def read_file(file_name):
@@ -148,7 +150,7 @@ class Example4:
         self.example4Data = Example4Data(self.locations)
         self.data = self.example4Data.create_data()
         self.sheets = []
-        self.json_data = {}
+        self.json_data = OrderedDict()
         self.init_lambda()
         self.init_xls_writer_values()
 
@@ -245,7 +247,7 @@ class Example4:
 
     def create(self):
         row, col = 0, 0
-        sheet = {}
+        sheet = OrderedDict()
 
         for k, v in self.data.items():
             departure, arrival, dates, companies = v["Departure"], v["Arrival"], v["dates"], v["companies"]
@@ -258,8 +260,8 @@ class Example4:
         self.sheets.append({"sheet": sheet})
         self.json_data["sheets"] = self.sheets
         self.json_data["formats"] = self.formats
-
-        print(self.json_data)
+        pp = pprint.PrettyPrinter(indent=4)
+        pp.pprint(self.json_data)
         return self.json_data
 
 
