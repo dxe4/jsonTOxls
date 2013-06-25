@@ -180,17 +180,20 @@ class Example4:
                     sheet[self.to_string(row, col)] = date_found
             col += 1
 
-    def add_dates(self, sheet, dates, companies, row):
+    def add_data(self, sheet, dates, companies, row):
         for description_count, description in enumerate(dates.keys()):
             description_row = description_count + row
             sheet[self.to_string(description_row, 0)] = description
             date_values = dates[description]
             for date_count, date in enumerate(date_values):
-                date_row = description_row + date_count + 1
-                sheet[self.to_string(date_row, 0)] = date.strftime('%m/%d/%Y')
-                self.add_prices(sheet, companies, date_row, date, description)
+                self.add_dates(sheet, companies, description_row, description, date_count, date)
             row += len(date_values)
         return row + len(dates.keys()) + 1
+
+    def add_dates(self, sheet, companies, description_row, description, date_count, date):
+        date_row = description_row + date_count + 1
+        sheet[self.to_string(date_row, 0)] = date.strftime('%m/%d/%Y')
+        self.add_prices(sheet, companies, date_row, date, description)
 
     def example4_realistic(self):
         row, col = 0, 0
@@ -199,7 +202,7 @@ class Example4:
             departure, arrival, dates, companies = v["Departure"], v["Arrival"], v["dates"], v["companies"]
             row = self.add_headers(sheet, row, col, arrival, departure)
             self.add_companies(sheet, companies, row)
-            row = self.add_dates(sheet, dates, companies, row + 1)
+            row = self.add_data(sheet, dates, companies, row + 1)
         self.sheets.append({"sheet": sheet})
         self.json_data["sheets"] = self.sheets
         print(self.json_data)
