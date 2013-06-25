@@ -154,11 +154,14 @@ class Example4:
 
     def init_xls_writer_values(self):
         self.formats = {
-            'date_format': {'num_format': 'mmm d yyyy'},
+            'date_format': {'num_format': 'mmm d yyyy','font_size': 11},
             'number': {'num_format': '$#,##.##'},
             'header_description': {'bold': True, 'font_color': '#333300', 'bg_color': '#E0E0E0', 'font_size': 14},
             'header_arrival': {'bold': True, 'font_color': '#CC3300', 'bg_color': '#E0E0E0', 'font_size': 14},
-            'header_departure': {'bold': True, 'font_color': '#CC0000', 'bg_color': '#E0E0E0', 'font_size': 14}
+            'header_departure': {'bold': True, 'font_color': '#CC0000', 'bg_color': '#E0E0E0', 'font_size': 14},
+            'date_description': {  'bg_color': '#CCFFFF', 'font_size': 12},
+            'company': {  'bg_color': '#CCFFFF', 'font_size': 12}
+            #CCFFFF
         }
         self.column_size = {
                 'A:H': 12
@@ -201,7 +204,7 @@ class Example4:
             Add companies e.g. company 4	company 8	company 2
         """
         for count, company_name in enumerate(companies.keys()):
-            sheet[self.to_string(row, count + 1)] = company_name
+            sheet[self.to_string(row, count + 1)] = {"value":company_name,"format":"company"}
         return row + 1
 
     def add_prices(self, sheet, companies, row, date_to_match, description):
@@ -217,7 +220,7 @@ class Example4:
     def add_data(self, sheet, dates, companies, row):
         for description_count, description in enumerate(dates.keys()):
             description_row = description_count + row
-            sheet[self.to_string(description_row, 0)] = description
+            sheet[self.to_string(description_row, 0)] = {"value":description,"format":"date_description"}
             date_values = dates[description]
             for date_count, date in enumerate(date_values):
                 self.add_dates(sheet, companies, description_row, description, date_count, date)
