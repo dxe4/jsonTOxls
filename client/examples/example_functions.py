@@ -140,8 +140,8 @@ def example3_formats_more():
     }
     return sheet
 
-class Example4:
 
+class Example4:
     def __init__(self):
         self.locations = read_file("locations")
         self.example4Data = Example4Data(self.locations)
@@ -151,15 +151,15 @@ class Example4:
         self.init_lambda()
 
     def init_lambda(self):
-            self.to_string = lambda row, col: str(row) + "," + str(col)
-            self.header_lambda = lambda row, col, to_string: (
-                #returns ['0,0', '0,1', '1,0', '1,1'],['24,0', '24,1', '25,0', '25,1'] etc
-                [to_string(r, c) for r, c in
-                [(row, col), (row, col + 1), (row + 1, col), (row + 1, col + 1), (row + 2, col + 1)]]
-            )
+        self.to_string = lambda row, col: str(row) + "," + str(col)
+        self.header_lambda = lambda row, col, to_string: (
+            #returns ['0,0', '0,1', '1,0', '1,1'],['24,0', '24,1', '25,0', '25,1'] etc
+            [to_string(r, c) for r, c in
+             [(row, col), (row, col + 1), (row + 1, col), (row + 1, col + 1), (row + 2, col + 1)]]
+        )
 
-    def add_headers(self,sheet,row,col,arrival,departure):
-        header_data = self.header_lambda(row, col,self.to_string)
+    def add_headers(self, sheet, row, col, arrival, departure):
+        header_data = self.header_lambda(row, col, self.to_string)
         sheet[header_data[0]] = "Arrival"
         sheet[header_data[1]] = arrival
         sheet[header_data[2]] = "Departure"
@@ -167,52 +167,50 @@ class Example4:
         row = int(header_data[4].split(",")[0]) #(int(x) for x in header_data[4].split(","))
         return row
 
-    def add_companies(self,sheet,companies,row):
+    def add_companies(self, sheet, companies, row):
         for count, company_name in enumerate(companies.keys()):
             sheet[self.to_string(row, count + 1)] = company_name
 
-    def add_prices(self,sheet,companies,row, date_to_match, description):
+    def add_prices(self, sheet, companies, row, date_to_match, description):
         col = 1;
         for company, dates in companies.items():
             for date_in_company in dates[description]:
                 date_found = data_structures.get_dict(date_in_company, date_to_match)
                 if date_found:
-                    sheet[ self.to_string(row, col)] = date_found
+                    sheet[self.to_string(row, col)] = date_found
             col += 1
+
+    def add_dates(self, sheet, dates, companies, row):
+        for description_count, description in enumerate(dates.keys()):
+            description_row = description_count + row
+            sheet[self.to_string(description_row, 0)] = description
+            date_values = dates[description]
+            for date_count, date in enumerate(date_values):
+                date_row = description_row + date_count + 1
+                sheet[self.to_string(date_row, 0)] = date.strftime('%m/%d/%Y')
+                self.add_prices(sheet, companies, date_row, date, description)
+            row += len(date_values)
+        return row + len(dates.keys()) + 1
 
     def example4_realistic(self):
         row, col = 0, 0
         sheet = {}
         for k, v in self.data.items():
             departure, arrival, dates, companies = v["Departure"], v["Arrival"], v["dates"], v["companies"]
-            row = self.add_headers(sheet,row,col,arrival,departure)
-            self.add_companies(sheet,companies,row)
-
-            def add_dates(row):
-                for description_count, description in enumerate(dates.keys()):
-                    description_row = description_count + row
-                    sheet[ self.to_string(description_row, 0)] = description
-                    date_values = dates[description]
-                    for date_count, date in enumerate(date_values):
-                        date_row = description_row + date_count + 1
-                        sheet[ self.to_string(date_row, 0)] = date.strftime('%m/%d/%Y')
-                        self.add_prices(sheet,companies,date_row, date, description)
-                    row += len(date_values)
-                return row + len(dates.keys()) + 1
-
-            row = add_dates(row + 1)
-
+            row = self.add_headers(sheet, row, col, arrival, departure)
+            self.add_companies(sheet, companies, row)
+            row = self.add_dates(sheet, dates, companies, row + 1)
         self.sheets.append({"sheet": sheet})
         self.json_data["sheets"] = self.sheets
         print(self.json_data)
         return self.json_data
 
 
-
 #example4.example4_realistic()
 
 def example4_realistic():
     return Example4().example4_realistic()
+
 
 functions = {"1": example1_hello_world(),
              "2": example2_formats_simple(),
