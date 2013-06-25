@@ -154,7 +154,7 @@ class Example4:
 
     def init_xls_writer_values(self):
         self.xlsx_data = {
-            'date_format':{'num_format': 'mmm d yyyy'},
+            'date_format': {'num_format': 'mmm d yyyy'},
             'number': {'num_format': '$#,##.##'}
         }
 
@@ -180,8 +180,8 @@ class Example4:
             nums = [int(n) for n in cell_str.split(",")]
             col = nums[1]
             row = nums[0]
-            columns = excel_common.number_to_cells([col,col+1])
-            return columns[0] + str(row+1) + ":" + columns[1] + str(row+1)
+            columns = excel_common.number_to_cells([col, col + 1])
+            return columns[0] + str(row + 1) + ":" + columns[1] + str(row + 1)
 
         sheet[header_data[0]] = "Arrival"
         sheet[merge(header_data[1])] = arrival
@@ -204,7 +204,7 @@ class Example4:
                 price_for_date = data_structures.get_dict(date_in_company, date_to_match)
                 if not price_for_date:
                     continue
-                sheet[self.to_string(row, col)] = {"value":price_for_date,"format":"number"}
+                sheet[self.to_string(row, col)] = {"value": price_for_date, "format": "number"}
             col += 1
 
     def add_data(self, sheet, dates, companies, row):
