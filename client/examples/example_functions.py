@@ -1,20 +1,14 @@
 import os.path, sys
 import pprint
-sys.path.append(os.path.dirname(__file__))
-import datetime
-from multiprocessing.dummy import active_children
-import random
 import os.path
-import sys
-# from random import randrange
-# from datetime import timedelta, time
-# from report_iterator import ReportIterator
+
 from example_data import Example4Data
 from server.input_factory import InputHandler
 from common import data_structures
 from common import excel as excel_common
 from collections import OrderedDict
-
+import sys
+#sys.path.append(os.path.dirname(__file__))
 
 
 def read_file(file_name):
