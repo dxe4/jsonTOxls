@@ -17,14 +17,14 @@ ___
 To run
 ------------
 
-    python3 server/server.py
-    python3 client/client.py (will run example 4)
+    python3 server/jsonTOxls_server.py
+    python3 client/jsonTOxls_client.py (will run example 4)
 
     if you want to run different examples run :
-        python3 client/client.py 1
-        python3 client/client.py 2
-        python3 client/client.py 3
-        python3 client/client.py 4
+        python3 client/jsonTOxls_client.py 1
+        python3 client/jsonTOxls_client.py 2
+        python3 client/jsonTOxls_client.py 3
+        python3 client/jsonTOxls_client.py 4
 
 Json and XLS examples in
 ------------
