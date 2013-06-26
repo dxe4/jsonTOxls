@@ -1,6 +1,6 @@
 from xlsxwriter.workbook import Workbook
 from collections import OrderedDict
-from input_factory import InputHandler
+import input_factory
 from common import data_structures
 
 
@@ -12,7 +12,7 @@ def create(input):
     """
     filename = data_structures.pop_dict(input, "filename")
     workbook = Workbook(filename)
-    formats = InputHandler.init_formats(input, workbook)
+    formats = input_factory.init_formats(input, workbook)
     for sheet in input['sheets']:
         process_sheet(workbook, sheet, formats)
     workbook.close()
@@ -46,8 +46,8 @@ def add_cells(sheet, sorted_dict, formats):
     column_sizes = data_structures.pop_dict(sorted_dict, "column_size")
 
     for cell_pos, cell_value in sorted_dict.items():
-        new_value = InputHandler.get_args(cell_value, formats)
-        new_key = InputHandler.parse_cell_position(cell_pos)
+        new_value = input_factory.get_args(cell_value, formats)
+        new_key = input_factory.parse_cell_position(cell_pos)
         args = new_key + new_value
         if isinstance(args[0], str) and ":" in args[0]:
             sheet.merge_range(*args)

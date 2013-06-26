@@ -3,7 +3,6 @@ import pprint
 import os.path
 
 from example_data import Example4Data
-from server.input_factory import InputHandler
 from common import data_structures
 from common import excel as excel_common
 from collections import OrderedDict
