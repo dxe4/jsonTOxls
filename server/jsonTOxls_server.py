@@ -1,15 +1,14 @@
 import tornado.ioloop
 import tornado.web
 from tornado.escape import json_decode
-import traceback, sys,os
+import traceback, sys, os
 import imp
 
 project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
-class_path = imp.load_source('module.name', project_dir+'/common/class_path.py')
+class_path = imp.load_source('module.name', project_dir + '/common/class_path.py')
 class_path.append_path()
 
 from server import xlsx_factory
-
 
 
 class MainHandler(tornado.web.RequestHandler):

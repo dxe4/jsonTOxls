@@ -7,8 +7,6 @@ from server.input_factory import InputHandler
 from common import data_structures
 from common import excel as excel_common
 from collections import OrderedDict
-import sys
-#sys.path.append(os.path.dirname(__file__))
 
 
 def read_file(file_name):
@@ -157,7 +155,7 @@ class Example4:
             'header_departure': {'bold': True, 'font_color': '#CC0000', 'bg_color': '#E0E0E0', 'font_size': 14},
             'date_description': {'bg_color': '#CCFFFF', 'font_size': 12},
             'company': {'bg_color': '#CCFFFF', 'font_size': 12},
-            'cond_format': { 'bg_color': '#FFFFCC', 'num_format': '$#,##.##'}
+            'cond_format': {'bg_color': '#FFFFCC', 'num_format': '$#,##.##'}
             #CCFFFF
         }
         self.column_size = {
@@ -238,7 +236,7 @@ class Example4:
             'type': 'cell', 'criteria': 'between', 'minimum': 1, 'maximum': min + 10, 'format': 'cond_format'
         }
 
-    def post_create(self,sheet):
+    def post_create(self, sheet):
         sheet["column_size"] = self.column_size
         sheet["conditional_formats"] = self.conditional_formats
         self.sheets.append({"sheet": sheet})
