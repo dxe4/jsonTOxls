@@ -8,7 +8,7 @@ project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)
 class_path = imp.load_source('module.name', project_dir + '/common/class_path.py')
 class_path.append_path()
 
-from server import xlsx_factory
+from excel import xlsx_factory
 
 
 class MainHandler(tornado.web.RequestHandler):

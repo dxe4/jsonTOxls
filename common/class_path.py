@@ -4,10 +4,9 @@ import sys, os
 def append_path():
     project_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
     path_list = [os.path.join(project_dir),
-                 os.path.join(project_dir, "client/examples"),
+                 os.path.join(project_dir, "examples"),
                  os.path.join(project_dir, "common"),
-                 os.path.join(project_dir, "client"),
-                 os.path.join(project_dir, "server")
+                 os.path.join(project_dir, "excel")
     ]
 
     for path in path_list:

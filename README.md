@@ -2,8 +2,8 @@
 jsonTOxls
 =========
 
-Create Excel files using json requests. A tornado server (http://www.tornadoweb.org/en/stable/) that accepts json requests to create xls,xlsx files using XlsxWriter (https://github.com/jmcnamara/XlsxWriter).
-Both client and server build in python but the client can be written in any language.
+Create Excel files using json requests. Send json to create xls,xlsx files using XlsxWriter (https://github.com/jmcnamara/XlsxWriter).
+You can optionally run a tornado server to accept the requests.
 
 ___
 It works as basic functionality (add values, sheets, formats, conditional formatting, merging)
@@ -17,14 +17,14 @@ ___
 To run
 ------------
 
-    python3 server/jsonTOxls_server.py
-    python3 client/jsonTOxls_client.py (will run example 4)
+    server (optional) : python3 jsonTOxls_server.py
+    python3 jsonTOxls.py (will run example 4)
 
     if you want to run different examples run :
-        python3 client/jsonTOxls_client.py 1
-        python3 client/jsonTOxls_client.py 2
-        python3 client/jsonTOxls_client.py 3
-        python3 client/jsonTOxls_client.py 4
+        python3 jsonTOxls.py 1
+        python3 jsonTOxls.py 2
+        python3 jsonTOxls.py 3
+        python3 jsonTOxls.py 4
 
 Json and XLS examples in
 ------------
@@ -35,11 +35,11 @@ Documentation
 ------------
 
     I am planning for documentation in http://www.readthedocs.org but for now
-    you can see the examples in client/examples/exmaple_functions.py and exmaple1-4.xls‎
+    you can see the examples in examples/exmaple_functions.py and exmaple1-4.xls‎
 
     For input documentation used to create files you can check xlsxwritter documentation at:
     https://xlsxwriter.readthedocs.org/en/latest/
 
-    Note: See client/exmaples/example4.xls and client/examples/example4.json for a realistic example,
+    Note: See exmaples/example4.xls and examples/example4.json for a realistic example,
     It contains lot of data, conditional formatting, fonts, colors, mergin etc
 
