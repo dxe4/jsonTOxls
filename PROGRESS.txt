@@ -9,6 +9,7 @@ DONE:
 - Add conditional formatting
 - Add realistic/more complicated examples & refactor/clean the examples code
 - Optional tornado server
+- Add documentation
 
 TODO:
 - Easy:
@@ -23,4 +24,3 @@ TODO:
     - Add Worksheet Tables
 
 IN PROGRESS:
-    - Add documentation. Due: today.
