@@ -181,3 +181,7 @@ Merge
 To merge use this:
      
      A1-D1:'merged region'
+
+Progress
+---
+You can check PROGRESS.txt for implemented functionality, coming functionality and known issues.
