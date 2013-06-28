@@ -11,9 +11,7 @@ from collections import OrderedDict
 def read_file(file_name):
     file_path = os.path.join(os.path.dirname(__file__), file_name)
     file = open(file_path, "r")
-    file_lines = []
-    for line in file:
-        file_lines.append(line.replace("\n", ""))
+    file_lines = [line.replace("\n", "") for line in file]
     return file_lines
 
 
@@ -241,8 +239,8 @@ class Example4:
         self.sheets.append({"sheet": sheet})
         self.json_data["sheets"] = self.sheets
         self.json_data["formats"] = self.formats
-        pp = pprint.PrettyPrinter(indent=4)
-        pp.pprint(self.json_data)
+        #pp = pprint.PrettyPrinter(indent=4)
+        #pp.pprint(self.json_data)
 
     def create(self):
         row, col = 0, 0
