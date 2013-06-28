@@ -185,3 +185,50 @@ To merge use this:
 Progress
 ---
 You can check PROGRESS.txt for implemented functionality, coming functionality and known issues.
+
+Motivation: Why do we need this anyway?
+---
+1) Unified approach, It's not specific to your programming language (if you run tornado).
+
+2) Abstraction: Chunking Up from excel specific code as shown in 3 to json dicts lists
+
+3)  Personally i dislike report code, hence this pseudo code example:
+
+     rowIndex, colIndex = 1,0
+     row = sheet.createRow(rowIndex)
+     cell = row.createCell(colIndex)
+     cell.setValue(values[(rowIndex,colIndex)])
+     cell.setStyle(styles[(rowIndex,colIndex)])
+
+Changes to:
+
+     row,col = 1,0
+     sheet[str(row) + "," + str(col)] = {
+               "value":values[(row,col)],
+               "format":formats[(row,col)]
+     }
+
+And with some imagination:
+
+     row,col = 1,0
+     key = lambda row,col: str(row) + "," + str(col)
+     val = lambda row,col:(
+              {
+                 "value":values[(row,col)],
+                  "format":formats[(row,col)]
+              }
+     )
+     sheet[key(row,col)] = val(row,col)
+
+4) And you end up applying divide and conquer technique for the problem which is now split in 4 steps: 
+     
+     - Fetch data
+     - Process data (decide which cells hold which values - create values and formats dictionaries)
+      -Create json as shown above
+      -Send json to create xls without writing code
+
+I will try to demonstrate this in the up-coming Exmaple 5 because theory is easier than practice (sometimes).
+     
+Feedback
+---
+If you disagree with anything or want to request a feature feel free: ANY feedback is much appreciated as well as criticism. 
