@@ -60,7 +60,10 @@ ___
             {"Test Sheet": sheet_data}
         ]
     }
-
+Example 1 Output:
+---
+![alt text](https://raw.github.com/papaloizouc/jsonTOxls/master/examples/images/example1.png "Example 1")
+___
 Example 2:
 ---
 Formats 
@@ -100,6 +103,10 @@ ___
             'number_bold_blue': {'bold': True, 'font_color': 'red', 'bg_color': '#99CCFF', 'num_format': '$#,##.##'},
         }
     }
+Example 2 Output:
+---
+![alt text](https://raw.github.com/papaloizouc/jsonTOxls/master/examples/images/example2.png "Example 2")
+___
 
 Example 3:
 ---
@@ -159,6 +166,11 @@ ___
         }
     }
 
+Example 3 Output:
+---
+![alt text](https://raw.github.com/papaloizouc/jsonTOxls/master/examples/images/example3.png "Example 3")
+___
+
 
 Example 4:
 --- 
@@ -168,6 +180,4 @@ Merge
 ---
 To merge use this:
      
-     A1-D1:'merged region' 
-
-
+     A1-D1:'merged region'
