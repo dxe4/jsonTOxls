@@ -35,7 +35,7 @@ Example 1:
 Just a "Hello World example".
 
      -The json contains a list of sheets.
-     -Each sheet contains a dictionary sheet name to data
+     -Each sheet is a dictionary sheet name to data
 ___
 
      sheet_data = {
