@@ -18,6 +18,7 @@ TODO:
     - Return xls file to the client, or url to the xls file (user can choose)
     - Add Support for multiple cells to apply on a format to reduce server traffic. e.g rows 1-10 column 2 add specific format.
         Instead of sending redundant data.
+    - Add Example 5 -> divide and conquer create xls in 4 steps.
 
 - More Challenging:
     - Add charts estimate start date jul 15th
