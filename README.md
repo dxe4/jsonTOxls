@@ -27,9 +27,7 @@ ___
 
 For input documentation used to create files you can check xlsxwritter documentation at:https://xlsxwriter.readthedocs.org/en/latest/ 
 
-Json and XLS examples in
----
-    /examples
+
 Example 1:
 ---
 Just a "Hello World example".
