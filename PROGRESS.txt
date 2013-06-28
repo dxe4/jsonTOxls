@@ -27,4 +27,4 @@ IN PROGRESS:
 
 KNOWN ISSUES:
 - Some functionality works for columns A-Z only estimate start date jul 14th
-- The tarball in /dist doesnt contains the exmaple/locations file therefore example4 wont work for the dist tarball
+- The tarball in /dist doesnt contains the exmaples/locations file therefore example4 wont work for the dist tarball
