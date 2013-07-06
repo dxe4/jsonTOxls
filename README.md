@@ -71,7 +71,8 @@ Formats
     -You can also use either '0,0':'Foo' or '0,0':{'value':'Foo','format':'the_format'}
     -For more about formats check the xlsxWritter doc
 ___
-         sheet_data = {
+```json
+   sheet_data = {
         'A1': {'value': 'Item', 'format': 'bold'},
         'B1': {'value': 'Cost', 'format': 'bold'},
         #
@@ -101,6 +102,7 @@ ___
             'number_bold_blue': {'bold': True, 'font_color': 'red', 'bg_color': '#99CCFF', 'num_format': '$#,##.##'},
         }
     }
+```
 Example 2 Output:
 ---
 ![alt text](https://raw.github.com/papaloizouc/jsonTOxls/master/examples/images/example2.png "Example 2")
