@@ -71,7 +71,7 @@ Formats
     -You can also use either '0,0':'Foo' or '0,0':{'value':'Foo','format':'the_format'}
     -For more about formats check the xlsxWritter doc
 ___
-```json
+```python
    sheet_data = {
         'A1': {'value': 'Item', 'format': 'bold'},
         'B1': {'value': 'Cost', 'format': 'bold'},
