@@ -35,7 +35,7 @@ Just a "Hello World example".
      -The json contains a list of sheets.
      -Each sheet is a dictionary sheet name to data
 ___
-
+```python
      sheet_data = {
         'A1': 'Item',
         'B1': 'Cost',
@@ -58,6 +58,7 @@ ___
             {"Test Sheet": sheet_data}
         ]
     }
+```
 Example 1 Output:
 ---
 ![alt text](https://raw.github.com/papaloizouc/jsonTOxls/master/examples/images/example1.png "Example 1")
@@ -112,6 +113,7 @@ Example 3:
 ---
      -Resize is inside the sheet data because different sheets may have different column sizes, same for conditional formatting.
 ___
+```python
      sheet_data = {
         'A1': {'value': 'Item', 'format': 'bold'},
         'B1': {'value': 'Cost', 'format': 'bold'},
@@ -165,7 +167,7 @@ ___
             'date_format2': {'num_format': 'yy dd mmm'}
         }
     }
-
+```
 Example 3 Output:
 ---
 ![alt text](https://raw.github.com/papaloizouc/jsonTOxls/master/examples/images/example3.png "Example 3")
