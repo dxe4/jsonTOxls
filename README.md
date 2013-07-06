@@ -195,23 +195,23 @@ Motivation: Why do we need this anyway?
 2) Abstraction: Chunking Up from excel specific code as shown in 3 to json dicts lists
 
 3) Personally i dislike report code, hence this pseudo code example*:
-
+```python
      rowIndex, colIndex = 1,0
      row = sheet.createRow(rowIndex)
      cell = row.createCell(colIndex)
      cell.setValue(values[(rowIndex,colIndex)])
      cell.setStyle(styles[(rowIndex,colIndex)])
-
+```
 Changes to:
-
+```python
      row,col = 1,0
      sheet[str(row) + "," + str(col)] = {
                "value":values[(row,col)],
                "format":formats[(row,col)]
      }
-
+```
 And with some imagination:
-
+```python
      row,col = 1,0
      key = lambda row,col: str(row) + "," + str(col)
      val = lambda row,col:(
@@ -221,7 +221,7 @@ And with some imagination:
               }
      )
      sheet[key(row,col)] = val(row,col)
-
+```
 *Note i didn't run this code, I just wrote it in the readme file to demonstrate an example.
 
 4) And you end up applying divide and conquer technique for the problem which is now split in 4 steps: 
