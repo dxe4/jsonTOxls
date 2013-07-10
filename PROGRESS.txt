@@ -21,10 +21,10 @@ TODO:
     - Add Example 5 -> divide and conquer create xls in 4 steps.
 
 - More Challenging:
-    - Add charts estimate start date jul 15th
     - Add Worksheet Tables
 
 IN PROGRESS:
+    - Add charts estimate start date jul 15th
 
 KNOWN ISSUES:
 - Some functionality works for columns A-Z only estimate start date jul 14th
