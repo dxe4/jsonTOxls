@@ -1,10 +1,7 @@
-import os.path, sys
-import pprint
 import os.path
+import common
+from examples.example_data import Example4Data
 
-from example_data import Example4Data
-from common import data_structures
-from common import excel_common as excel_common
 from collections import OrderedDict
 
 
@@ -153,7 +150,6 @@ class Example4:
             'date_description': {'bg_color': '#CCFFFF', 'font_size': 12},
             'company': {'bg_color': '#CCFFFF', 'font_size': 12},
             'cond_format': {'bg_color': '#FFFFCC', 'num_format': '$#,##.##'}
-            #CCFFFF
         }
         self.column_size = {
             'A:H': 12
@@ -163,39 +159,28 @@ class Example4:
     def init_lambda(self):
         self.to_string = lambda row, col: str(row) + "," + str(col)
         self.header_lambda = lambda row, col, to_string: (
-            #returns ['0,0', '0,1', '1,0', '1,1'],['24,0', '24,1', '25,0', '25,1'] etc
             [to_string(r, c) for r, c in
              [(row, col), (row, col + 1), (row + 1, col), (row + 1, col + 1), (row + 2, col + 1)]]
         )
 
     def add_headers(self, sheet, row, col, arrival, departure):
-
-        """
-            Add headers e.g.
-                Arrival	'Teesside Airport'
-                Departure	'Sandefjord Airport'
-        :return: current row
-        """
         header_data = self.header_lambda(row, col, self.to_string)
 
         def merge(cell_str):
             nums = [int(n) for n in cell_str.split(",")]
             col = nums[1]
             row = nums[0]
-            columns = excel_common.number_to_cells([col, col + 3])
+            columns = common.number_to_cells([col, col + 3])
             return columns[0] + str(row + 1) + ":" + columns[1] + str(row + 1)
 
         sheet[header_data[0]] = {"value": "Arrival", "format": "header_description"}
         sheet[merge(header_data[1])] = {"value": arrival, "format": "header_arrival"}
         sheet[header_data[2]] = {"value": 'Departure', "format": "header_description"}
         sheet[merge(header_data[3])] = {"value": departure, "format": "header_departure"}
-        row = int(header_data[4].split(",")[0]) #(int(x) for x in header_data[4].split(","))
+        row = int(header_data[4].split(",")[0])
         return row
 
     def add_companies(self, sheet, companies, row):
-        """
-            Add companies e.g. company 4	company 8	company 2
-        """
         for count, company_name in enumerate(companies.keys()):
             sheet[self.to_string(row, count + 1)] = {"value": company_name, "format": "company"}
         return row + 1
@@ -205,7 +190,7 @@ class Example4:
         min = -1
         for company, dates in companies.items():
             for date_in_company in dates[description]:
-                price_for_date = data_structures.get_dict(date_in_company, date_to_match)
+                price_for_date = common.get_dict(date_in_company, date_to_match)
                 if not price_for_date:
                     continue
                 min = int(float(price_for_date)) if int(float(price_for_date)) < min or min == -1 else min
@@ -228,7 +213,7 @@ class Example4:
         self.add_prices(sheet, companies, date_row, date, description)
 
     def add_conditional_format(self, start_row, end_row, start_col, end_col, min):
-        cols = excel_common.number_to_cells([start_col, end_col - 1])
+        cols = common.number_to_cells([start_col, end_col - 1])
         self.conditional_formats[cols[0] + str(start_row + 1) + ":" + cols[1] + str(end_row + 1)] = {
             'type': 'cell', 'criteria': 'between', 'minimum': 1, 'maximum': min + 10, 'format': 'cond_format'
         }
@@ -239,8 +224,6 @@ class Example4:
         self.sheets.append({"sheet": sheet})
         self.json_data["sheets"] = self.sheets
         self.json_data["formats"] = self.formats
-        #pp = pprint.PrettyPrinter(indent=4)
-        #pp.pprint(self.json_data)
 
     def create(self):
         row, col = 0, 0

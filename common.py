@@ -1,5 +1,37 @@
-import datetime
 import random
+import datetime
+
+a_to_z = range(ord("a"), ord("z"))
+
+
+def number_to_cell(row, col):
+    new_row = chr(a_to_z[col]).upper()
+    return new_row.upper() + str(row)
+
+
+def number_to_cell(col):
+    return chr(a_to_z[col]).upper()
+
+
+def number_to_cells(columns):
+    return [chr(a_to_z[col]).upper() for col in columns]
+
+
+def random_list_item(list):
+    index = random.randrange(0, list.__len__())
+    return list[index]
+
+get_dict = lambda dictionary, key: dictionary[key] if key in dictionary else None;
+pop_dict = lambda dictionary, key: dictionary.pop(key) if key in dictionary else {};
+
+def safe_get_dict(dictionary, key, method):
+    functions = {
+        "pop":pop_dict,
+        "get": get_dict
+    }
+    f = functions[method]
+    return f(dictionary, key)
+
 
 #TODO fix random days
 def random_date(year=None, month=None, day=None):
@@ -31,5 +63,3 @@ def random_dates_sorted(year=None, month=None, day=None):
         return date_1, date_2
     else:
         return date_2, date_1
-
-
